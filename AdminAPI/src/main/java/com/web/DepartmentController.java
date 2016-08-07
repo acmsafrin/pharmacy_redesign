@@ -5,12 +5,10 @@
  */
 package com.web;
 
-import com.db.entity.Category;
-import com.google.gson.Gson;
+import com.db.entity.Department;
 import com.pojo.ErrorStatus;
-import com.pojo.Status;
 import com.pojo.SuccesStatus;
-import com.service.CategoryService;
+import com.service.DepartmentService;
 import com.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,12 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ACM Safrin
  */
 @RestController
-@RequestMapping("/category")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/category/
-public class CategoryController {
+@RequestMapping("/department")
+//url:http://localhost:8080/StudentRestApiHibernateSpring/department/
+public class DepartmentController {
 
     @Autowired
-    private CategoryService service;
+    private DepartmentService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
@@ -61,7 +59,7 @@ public class CategoryController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody Category entity) {
+    String save(@RequestBody Department entity) {
         String result;
         try {
             service.save(entity);
@@ -74,7 +72,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String update(@PathVariable("id") long id, @RequestBody Category entity) {
+    String update(@PathVariable("id") long id, @RequestBody Department entity) {
         String result;
         try {
             service.update(entity);
@@ -98,12 +96,14 @@ public class CategoryController {
         return result;
     }
 
-    public CategoryService getCategoryService() {
+    public DepartmentService getService() {
         return service;
     }
 
-    public void setCategoryService(CategoryService categoryService) {
-        this.service = categoryService;
+    public void setService(DepartmentService service) {
+        this.service = service;
     }
+    
+    
 
 }

@@ -1,0 +1,15 @@
+<a ui-sref="department_new" class="btn-primary btn-lg nodecoration">Add New Department</a>
+
+<table class="table movietable">
+  <tr>
+    <td><h3>All</h3></td>
+    <td></td>
+  </tr>
+  <tr ng-repeat="obj in list">
+    <td>{{obj.name}}</td>
+    <td>
+      <a class="btn btn-primary" ui-sref="department_view({id:obj.id})">View</a>
+      <a class="btn btn-danger"  ng-click="delete(obj)">Delete</a>
+    </td>
+  </tr>
+</table>

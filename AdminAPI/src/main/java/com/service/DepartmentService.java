@@ -5,8 +5,8 @@
  */
 package com.service;
 
-import com.db.dao.CategoryFacade;
-import com.db.entity.Category;
+import com.db.dao.DepartmentFacade;
+import com.db.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
  * @author ACM Safrin
  */
 @Service
-public class CategoryService extends AbstractRestService<Category> {
+public class DepartmentService extends AbstractRestService<Department> {
 
     @Autowired
-    public void setAbstractFacade(CategoryFacade facade) {
+    public void setAbstractFacade(DepartmentFacade facade) {
         super.setAbstractFacade(facade); //To change body of generated methods, choose Tools | Templates.
     }
 

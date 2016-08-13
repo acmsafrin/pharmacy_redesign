@@ -1,4 +1,7 @@
-angular.module('pharmacyApp', ['ui.router', 'ngResource', 'category.controllers','department.controllers', 'pharmacyApp.services']);
+angular.module('pharmacyApp', ['ui.router', 'ngResource', 
+    'ngMaterial', 'ngMessages',
+    'category.controllers','department.controllers',
+    'institution.controllers', 'pharmacyApp.services']);
 
 angular.module('pharmacyApp').config(['$stateProvider',function($stateProvider) {
   //Category
@@ -35,6 +38,24 @@ angular.module('pharmacyApp').config(['$stateProvider',function($stateProvider) 
     url: '/department/:id/edit',
     templateUrl: 'partials/department/edit.html',
     controller: 'department_edit'
+  })
+  //Institution
+  .state('institution_list', { 
+    url: '/institution',
+    templateUrl: 'partials/institution/list.html',
+    controller: 'institution_list'
+  }).state('institution_view', { 
+    url: '/institution/:id/view',
+    templateUrl: 'partials/institution/view.html',
+    controller: 'institution_view'
+  }).state('institution_new', {
+    url: '/institution/new',
+    templateUrl: 'partials/institution/new.html',
+    controller: 'institution_new'
+  }).state('institution_edit', { 
+    url: '/institution/:id/edit',
+    templateUrl: 'partials/institution/edit.html',
+    controller: 'institution_edit'
   })
 }]).run(['$state',function($state) {
   $state.go('category_list'); //make a transition to movies state when app starts

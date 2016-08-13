@@ -1,14 +1,14 @@
 angular.module('category.controllers', []).controller('category_list', ['$scope', '$window', 'Category',function($scope, $window, Category) {
-  $scope.list = Category.query();
+  $scope.list = Category.REST.query();
   $scope.delete= function(obj) {    
       obj.$delete(function() {
         $window.location.href = ''; 
       });    
   };
 }]).controller('category_view',['$scope', '$stateParams', 'Category', function($scope, $stateParams, Category) {
-  $scope.current = Category.get({ id: $stateParams.id }); 
+  $scope.current = Category.REST.get({ id: $stateParams.id }); 
 }]).controller('category_new',['$scope', '$state', 'Category',function($scope, $state, Category) {
-  $scope.current = new Category();  
+  $scope.current = new Category.REST();  
 
   $scope.add = function() { 
     $scope.current.$save(function() {
@@ -23,7 +23,7 @@ angular.module('category.controllers', []).controller('category_list', ['$scope'
   };
 
   $scope.load = function() { 
-    $scope.current = Category.get({ id: $stateParams.id });
+    $scope.current = Category.REST.get({ id: $stateParams.id });
   };
 
   $scope.load(); 

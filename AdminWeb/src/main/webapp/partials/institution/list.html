@@ -1,4 +1,4 @@
-<a ui-sref="department_new" class="btn-primary btn-lg nodecoration">Add New Department</a>
+<a ui-sref="institution_new" class="btn-primary btn-lg nodecoration">Add New Institution</a>
 
 <table class="table movietable">
   <tr>
@@ -7,9 +7,8 @@
   </tr>
   <tr ng-repeat="obj in list">
     <td>{{obj.name}}</td>
-    <td>{{obj.institution.name}}</td>
     <td>
-      <a class="btn btn-primary" ui-sref="department_view({id:obj.id})">View</a>
+      <a class="btn btn-primary" ui-sref="institution_view({id:obj.id})">View</a>
       <a class="btn btn-danger"  ng-click="delete(obj)">Delete</a>
     </td>
   </tr>

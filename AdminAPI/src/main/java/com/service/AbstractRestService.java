@@ -33,6 +33,10 @@ public class AbstractRestService<T> {
     public String find(long id) {
         return GsonUtil.toJson(abstractFacade.find(id));
     }
+    
+     public String findByName(String name) {
+        return GsonUtil.toJson(abstractFacade.findByName(name));
+    }
 
     @Transactional(readOnly = false)
     public void save(T t) {

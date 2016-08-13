@@ -5,10 +5,10 @@
  */
 package com.web;
 
-import com.db.entity.Category;
+import com.db.entity.Institution;
 import com.pojo.ErrorStatus;
 import com.pojo.SuccesStatus;
-import com.service.CategoryService;
+import com.service.InstitutionService;
 import com.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ACM Safrin
  */
 @RestController
-@RequestMapping("/category")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/category/
-public class CategoryController {
+@RequestMapping("/institution")
+//url:http://localhost:8080/StudentRestApiHibernateSpring/institution/
+public class InstitutionController {
 
     @Autowired
-    private CategoryService service;
+    private InstitutionService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
@@ -38,6 +38,7 @@ public class CategoryController {
         try {
             result = service.findAll();
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 
@@ -56,10 +57,37 @@ public class CategoryController {
 
         return result;
     }
+    
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    String filterByName(@PathVariable("name") String name) {
+        String result;
+        try {
+            result = service.findByName(name);
+        } catch (Exception e) {
+            result = GsonUtil.toJson(new ErrorStatus());
+        }
+
+        return result;
+    }
+    
+//     @RequestMapping(value = "/name", method = RequestMethod.GET)
+//    public @ResponseBody
+//    String filterByName() {
+//        String result;
+//        try {
+//            result = service.findAll();
+//        } catch (Exception e) {
+//            result = GsonUtil.toJson(new ErrorStatus());
+//        }
+//
+//        return result;
+//    }
+    
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody Category entity) {
+    String save(@RequestBody Institution entity) {
         String result;
         try {
             service.save(entity);
@@ -72,7 +100,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String update(@PathVariable("id") long id, @RequestBody Category entity) {
+    String update(@PathVariable("id") long id, @RequestBody Institution entity) {
         String result;
         try {
             service.update(entity);
@@ -96,12 +124,15 @@ public class CategoryController {
         return result;
     }
 
-    public CategoryService getCategoryService() {
+    public InstitutionService getService() {
         return service;
     }
 
-    public void setCategoryService(CategoryService categoryService) {
-        this.service = categoryService;
+    public void setService(InstitutionService service) {
+        this.service = service;
     }
+
+    
+  
 
 }

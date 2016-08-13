@@ -7,9 +7,7 @@ package com.db.entity;
 
 import com.enums.InstitutionType;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,10 +18,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -90,9 +86,7 @@ public class Institution implements Serializable {
     String transAddress3;
     @Transient
     String transAddress4;
-    
-    @OneToMany(mappedBy = "institution", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Institution> branch = new ArrayList<>();
+
     @Lob
     String descreption;
 
@@ -405,15 +399,6 @@ public class Institution implements Serializable {
     }
     
     
-
-    @XmlTransient
-    public List<Institution> getBranch() {
-        return branch;
-    }
-
-    public void setBranch(List<Institution> branch) {
-        this.branch = branch;
-    }
 
     public Institution getInstitution() {
         

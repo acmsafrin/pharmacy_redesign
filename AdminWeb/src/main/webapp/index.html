@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>The Pharmacy App</title>
         <link rel="stylesheet" type="text/css" href="resources/lib/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/lib/angular-material.min.css"/>                
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -17,6 +18,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a ui-sref="category_list">Category</a></li>
                         <li class="active"><a ui-sref="department_list">Department</a></li>
+                         <li class="active"><a ui-sref="institution_list">Institution</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,11 +33,16 @@
         <script type="text/javascript" src="resources/lib/jquery-3.1.0.min.js"></script>
         <script type="text/javascript" src="resources/lib/angular.min.js"></script>
         <script type="text/javascript" src="resources/lib/angular-resource.min.js"></script>      
-        <script type="text/javascript" src="resources/lib/angular-ui-router.min.js"></script>   
+        <script type="text/javascript" src="resources/lib/angular-ui-router.min.js"></script> 
+        <script type="text/javascript" src="resources/lib/angular-aria.min.js"></script> 
+        <script type="text/javascript" src="resources/lib/angular-animate.min.js"></script> 
+        <script type="text/javascript" src="resources/lib/angular-messages.min.js"></script>         
+        <script type="text/javascript" src="resources/lib/angular-material.min.js"></script>                 
         <script type="text/javascript" src="resources/js/app.js"></script>     
         <script type="text/javascript" src="resources/js/service.js"></script>
         <script type="text/javascript" src="resources/js/categoryControllers.js"></script>       
         <script type="text/javascript" src="resources/js/departmentControllers.js"></script>
+        <script type="text/javascript" src="resources/js/institutionControllers.js"></script>
         <!--<script type="text/javascript" src="AdminWeb/resources/js/app.min.js"></script>-->
     </body>
 </html>

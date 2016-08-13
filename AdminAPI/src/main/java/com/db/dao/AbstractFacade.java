@@ -44,6 +44,12 @@ public class AbstractFacade<T> {
     public T find(Long id) {
         return getHibernateTemplate().get(entityClass, id);
     }
+    
+    
+    public List<T> findByName(String name) {
+         List<T> list = (List<T>) (getHibernateTemplate().find(" from " + entityClass.getSimpleName()+" e where e.name like '%"+name+"%'"));
+         return list;
+    }
 
     public void refresh(T entity) {
         getHibernateTemplate().refresh(entity);

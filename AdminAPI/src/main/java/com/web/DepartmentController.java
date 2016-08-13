@@ -73,9 +73,13 @@ public class DepartmentController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String update(@PathVariable("id") long id, @RequestBody Department entity) {
-        String result;
+        String result;        
         try {
+            
             service.update(entity);
+            System.err.println("AAAA "+entity);
+            System.err.println("BBBB "+entity.getInstitution());
+            
             result = GsonUtil.toJson(new SuccesStatus());
         } catch (Exception e) {
             result = GsonUtil.toJson(new ErrorStatus());

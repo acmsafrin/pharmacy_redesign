@@ -13,7 +13,6 @@ import com.enums.Title;
 import com.enums.Sex;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,11 +43,7 @@ public class Person implements Serializable {
     String fax;
     String email;
     String website;
-    String mobile;
-    @Column(name = "TNAME")
-    String fullName;
-    @Column(name = "SNAME")
-    String nameWithInitials;
+    String mobile;   
     String phone;
     String initials;
     String surName;
@@ -79,17 +74,7 @@ public class Person implements Serializable {
     Sex sex;
     @Transient
     String nameWithTitle;
-    boolean foreigner = false;
-
-  
-
-    public boolean isForeigner() {
-        return foreigner;
-    }
-
-    public void setForeigner(boolean foreigner) {
-        this.foreigner = foreigner;
-    }
+   
 
     public String getNameWithTitle() {
         String temT = "";
@@ -342,22 +327,6 @@ public class Person implements Serializable {
 
     public void setDob(Date dob) {
         this.dob = dob;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getNameWithInitials() {
-        return nameWithInitials;
-    }
-
-    public void setNameWithInitials(String nameWithInitials) {
-        this.nameWithInitials = nameWithInitials;
     }
 
     public String getPhone() {

@@ -70,20 +70,6 @@ public class InstitutionController {
 
         return result;
     }
-    
-//     @RequestMapping(value = "/name", method = RequestMethod.GET)
-//    public @ResponseBody
-//    String filterByName() {
-//        String result;
-//        try {
-//            result = service.findAll();
-//        } catch (Exception e) {
-//            result = GsonUtil.toJson(new ErrorStatus());
-//        }
-//
-//        return result;
-//    }
-    
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody

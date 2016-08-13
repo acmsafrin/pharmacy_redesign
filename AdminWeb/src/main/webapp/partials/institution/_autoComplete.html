@@ -2,11 +2,11 @@
     <md-content>       
            <md-autocomplete   md-selected-item="current.institution" 
                               md-search-text="searchText"
-                              md-items="item in institutionFilter.filterByName(searchText)" 
+                              md-items="item in institutionFilter.filterByName(searchText)"                               
                               md-item-text="item.name" md-min-length="2" 
                               placeholder="Type Institution Name!">
                 <md-item-template>
-                    <span md-highlight-text="institutionFilterText" md-highlight-flags="^i">{{item.name}}</span>
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
                 </md-item-template>
                 <md-not-found>
                     No institution matching "{{searchText}}" were found.          

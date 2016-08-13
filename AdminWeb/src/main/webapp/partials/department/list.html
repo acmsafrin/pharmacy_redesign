@@ -1,16 +1,12 @@
-<a ui-sref="department_new" class="btn-primary btn-lg nodecoration">Add New Department</a>
-
-<table class="table movietable">
-  <tr>
-    <td><h3>All</h3></td>
-    <td></td>
-  </tr>
-  <tr ng-repeat="obj in list">
-    <td>{{obj.name}}</td>
-    <td>{{obj.institution.name}}</td>
-    <td>
-      <a class="btn btn-primary" ui-sref="department_view({id:obj.id})">View</a>
-      <a class="btn btn-danger"  ng-click="delete(obj)">Delete</a>
-    </td>
-  </tr>
+<div class="my-list-table">
+<table class="table table-striped" >
+    <tr>
+        <td><h4>Department Management</h4></td>
+        <td></td>
+    </tr>
+    <tr ng-click="view(option.id)" ng-repeat="option in list">
+        <td>{{option.id}}</td>
+        <td>{{option.name}}</td>       
+    </tr>
 </table>
+</div>

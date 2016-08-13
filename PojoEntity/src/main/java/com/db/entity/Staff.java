@@ -28,10 +28,6 @@ import javax.persistence.Transient;
 @Entity
 public class Staff implements Serializable {
 
-  
-   
-    int orderNo;
-    
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,9 +38,7 @@ public class Staff implements Serializable {
     String qualification;
     String code = "";
     @ManyToOne
-    Person person;
-    @ManyToOne
-    Speciality speciality;
+    Person person;  
     @ManyToOne
     Institution institution;
     @ManyToOne
@@ -55,22 +49,22 @@ public class Staff implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date createdAt;
     //Retairing properties
-    boolean retired;
+     private boolean retired;
     @ManyToOne
-    WebUser retirer;
+   private WebUser retirer;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
-    String staffCode;
+    private Date retiredAt;
+   private String retireComments;
+    private String staffCode;
     @Lob
     @Basic(fetch = FetchType.LAZY)
     byte[] baImage = new byte[1];
-    String fileName;
-    String fileType;
+   private String fileName;
+   private String fileType;
     private double charge;
     //////////////////
     @OneToOne
-    Department workingDepartment;
+  private  Department workingDepartment;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dateJoined;
@@ -93,17 +87,7 @@ public class Staff implements Serializable {
     String epfNo;    
   
 
-    String acNo;
 
-//    double workingHourPerShift;
-//    double leaveHour;
-    double annualWelfareQualified;
-    double annualWelfareUtilized;
-    double workingTimeForOverTimePerWeek;
-    double workingTimeForNoPayPerWeek;
-    Integer codeInterger;
-    boolean allowedLateInLeave = true;
-    boolean allowedEarlyOutLeave = true;
 
     public double getTransDblValue() {
         return transDblValue;
@@ -123,31 +107,7 @@ public class Staff implements Serializable {
         this.dateRetired = dateRetired;
     }
     
-    
-
-    public boolean isAllowedLateInLeave() {
-        return allowedLateInLeave;
-    }
-
-    public void setAllowedLateInLeave(boolean allowedLateInLeave) {
-        this.allowedLateInLeave = allowedLateInLeave;
-    }
-
-    public boolean isAllowedEarlyOutLeave() {
-        return allowedEarlyOutLeave;
-    }
-
-    public void setAllowedEarlyOutLeave(boolean allowedEarlyOutLeave) {
-        this.allowedEarlyOutLeave = allowedEarlyOutLeave;
-    }
-
-    public double getWorkingTimeForNoPayPerWeek() {
-        return workingTimeForNoPayPerWeek;
-    }
-
-    public void setWorkingTimeForNoPayPerWeek(double workingTimeForNoPayPerWeek) {
-        this.workingTimeForNoPayPerWeek = workingTimeForNoPayPerWeek;
-    }
+  
 
     public double getTransWorkedDays() {
         return transWorkedDays;
@@ -157,51 +117,7 @@ public class Staff implements Serializable {
         this.transWorkedDays = transWorkedDays;
     }
 
-    public double getWorkingTimeForOverTimePerWeek() {
-        return workingTimeForOverTimePerWeek;
-    }
-
-    public void setWorkingTimeForOverTimePerWeek(double workingTimeForOverTimePerWeek) {
-        this.workingTimeForOverTimePerWeek = workingTimeForOverTimePerWeek;
-    }
-
-    public Integer getCodeInterger() {
-        return codeInterger;
-    }
-
-    public void setCodeInterger(Integer codeInterger) {
-        this.codeInterger = codeInterger;
-    }
-
-    public void chageCodeToInteger() {
-        if (code == null || code.isEmpty()) {
-            return;
-        }
-
-        try {
-            codeInterger = Integer.parseInt(code);
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
-    }
-
-//    public double getBasic() {
-//        double tmp2=0.0;
-//        if (getStaffEmployment()!=null && !getStaffEmployment().getStaffBasics().isEmpty()) {
-//            tmp2 = getStaffEmployment().getStaffBasics().get(getStaffEmployment().getStaffBasics().size() - 1).getStaffPaySheetComponentValue();
-//        }
-//        
-//        return tmp2;
-//    }
-//    public double getLeaveHour() {
-//        return leaveHour;
-//    }
-//
-//    public void setLeaveHour(double leaveHour) {
-//        this.leaveHour = leaveHour;
-//    }
+   
     public byte[] getBaImage() {
         return baImage;
     }
@@ -323,18 +239,10 @@ public class Staff implements Serializable {
     }
 
     public void setCode(String code) {
-        this.code = code;
-        chageCodeToInteger();
+        this.code = code;     
     }
 
-    public Speciality getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(Speciality speciality) {
-        this.speciality = speciality;
-    }
-
+   
     public String getRegistration() {
         return registration;
     }
@@ -351,11 +259,7 @@ public class Staff implements Serializable {
         this.qualification = qualification;
     }
 
-    public Institution getInstitution() {
-        if(institution != null){
-            institution.split();
-        }
-        
+    public Institution getInstitution() {      
         return institution;
     }
 
@@ -395,19 +299,7 @@ public class Staff implements Serializable {
         }
 
     }
-    @Transient
-    boolean dayOff;
-
-    public boolean isDayOff() {
-        return dayOff;
-    }
-
-    public void setDayOff(boolean dayOff) {
-
-        this.dayOff = dayOff;
-
-    }
-
+  
     public Department getWorkingDepartment() {
         return workingDepartment;
     }
@@ -435,27 +327,7 @@ public class Staff implements Serializable {
         this.dateLeft = dateLeft;
     }
    
-    @Transient
-    boolean tmp;
-
-    public boolean isTmp() {
-        return tmp;
-    }
-
-    public void setTmp(boolean tmp) {
-        this.tmp = tmp;
-    }
-
-    public int getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(int orderNo) {
-        this.orderNo = orderNo;
-    }
-
-   
-
+    
     public double getBasic() {
         return basic;
     }
@@ -488,44 +360,12 @@ public class Staff implements Serializable {
         this.epfNo = epfNo;
     }
 
-    
-    public String getAcNo() {
-        return acNo;
-    }
-
-    public void setAcNo(String acNo) {
-        this.acNo = acNo;
-    }
-
-//    public double getWorkingHourPerShift() {
-//        return workingHourPerShift;
-//    }
-//
-//    public void setWorkingHourPerShift(double workingHourPerShift) {
-//        this.workingHourPerShift = workingHourPerShift;
-//    }
     public double getCharge() {
         return charge;
     }
 
     public void setCharge(double charge) {
         this.charge = charge;
-    }
-
-    public double getAnnualWelfareQualified() {
-        return annualWelfareQualified;
-    }
-
-    public void setAnnualWelfareQualified(double annualWelfareQualified) {
-        this.annualWelfareQualified = annualWelfareQualified;
-    }
-
-    public double getAnnualWelfareUtilized() {
-        return annualWelfareUtilized;
-    }
-
-    public void setAnnualWelfareUtilized(double annualWelfareUtilized) {
-        this.annualWelfareUtilized = annualWelfareUtilized;
     }
 
     public Institution getEpfBankBranch() {
@@ -543,8 +383,6 @@ public class Staff implements Serializable {
     public void setEpfAccountNo(String epfAccountNo) {
         this.epfAccountNo = epfAccountNo;
     }
-
    
-    
 
 }

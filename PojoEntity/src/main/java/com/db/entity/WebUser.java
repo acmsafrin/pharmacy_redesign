@@ -29,18 +29,7 @@ public class WebUser implements Serializable {
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    Drawer drawer;
-//
-//    public Drawer getDrawer() {
-//        return drawer;
-//    }
-//
-//    public void setDrawer(Drawer drawer) {
-//        this.drawer = drawer;
-//    }
-   
+    Long id;   
     String webUserPassword;
     @OneToOne
     Person webUserPerson;

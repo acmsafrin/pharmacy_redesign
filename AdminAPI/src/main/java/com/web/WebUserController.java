@@ -5,10 +5,12 @@
  */
 package com.web;
 
-import com.db.entity.Department;
+import com.db.entity.Institution;
+import com.db.entity.WebUser;
 import com.pojo.ErrorStatus;
 import com.pojo.SuccesStatus;
-import com.service.DepartmentService;
+import com.service.InstitutionService;
+import com.service.WebUserService;
 import com.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,12 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ACM Safrin
  */
 @RestController
-@RequestMapping("/department")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/department/
-public class DepartmentController {
+@RequestMapping("/webuser")
+//url:http://localhost:8080/StudentRestApiHibernateSpring/webuser/
+public class WebUserController {
 
     @Autowired
-    private DepartmentService service;
+    private WebUserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
@@ -38,6 +40,7 @@ public class DepartmentController {
         try {
             result = service.findAll();
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 
@@ -56,10 +59,23 @@ public class DepartmentController {
 
         return result;
     }
+    
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    String filterByName(@PathVariable("name") String name) {
+        String result;
+        try {
+            result = service.findByName(name);
+        } catch (Exception e) {
+            result = GsonUtil.toJson(new ErrorStatus());
+        }
+
+        return result;
+    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody Department entity) {
+    String save(@RequestBody WebUser entity) {
         String result;
         try {
             service.save(entity);
@@ -72,10 +88,10 @@ public class DepartmentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String update(@PathVariable("id") long id, @RequestBody Department entity) {
-        String result;        
-        try {            
-            service.update(entity);            
+    String update(@PathVariable("id") long id, @RequestBody WebUser entity) {
+        String result;
+        try {
+            service.update(entity);
             result = GsonUtil.toJson(new SuccesStatus());
         } catch (Exception e) {
             result = GsonUtil.toJson(new ErrorStatus());
@@ -96,14 +112,15 @@ public class DepartmentController {
         return result;
     }
 
-    public DepartmentService getService() {
+    public WebUserService getService() {
         return service;
     }
 
-    public void setService(DepartmentService service) {
+    public void setService(WebUserService service) {
         this.service = service;
     }
-    
-    
+
+ 
+  
 
 }

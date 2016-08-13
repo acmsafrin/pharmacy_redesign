@@ -22,11 +22,8 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     //Main Properties
-    String name;
-    String tName;
-    String sName;
+    String name;   
     String description;
-    int orderNo;
     //Created Properties
     @ManyToOne
     WebUser creater;
@@ -42,30 +39,9 @@ public class Category implements Serializable {
     Double dblValue;
     Long longValue;
     @ManyToOne
-    Category parentCategory;
-    Double saleMargin = 0.0;
-    Double wholeSaleMargin = 0.0;
-    String code;
-    @Transient
-    private String entityClass;
-    boolean filled;
+    Category parentCategory;    
+    String code;    
 
-    // @ManyToOne
-    //   private Department department;
-    public boolean isFilled() {
-        return filled;
-    }
-
-    public void setFilled(boolean filled) {
-        this.filled = filled;
-    }
-    
-    
-    
-
-    public String getCategoryClass() {
-        return this.getClass().toString();
-    }
 
     public String getCode() {
         return code;
@@ -76,22 +52,6 @@ public class Category implements Serializable {
     }
 
     public Category() {
-    }
-
-    public Double getSaleMargin() {
-        return saleMargin;
-    }
-
-    public void setSaleMargin(Double saleMargin) {
-        this.saleMargin = saleMargin;
-    }
-
-    public Double getWholeSaleMargin() {
-        return wholeSaleMargin;
-    }
-
-    public void setWholeSaleMargin(Double wholeSaleMargin) {
-        this.wholeSaleMargin = wholeSaleMargin;
     }
 
     public Double getDblValue() {
@@ -182,14 +142,7 @@ public class Category implements Serializable {
         this.retirer = retirer;
     }
 
-    public int getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(int orderNo) {
-        this.orderNo = orderNo;
-    }
-
+   
     public Long getId() {
         return id;
     }
@@ -222,39 +175,5 @@ public class Category implements Serializable {
         return "com.divudi.entity.Category[ id=" + id + " ]";
     }
     
-    public String gettName() {
-        return tName;
-    }
 
-    public void settName(String tName) {
-        this.tName = tName;
-    }
-
-    public String getsName() {
-        //System.out.println("get name");
-        return sName;
-    }
-
-    public void setsName(String sName) {
-        //System.out.println("set name");
-        this.sName = sName;
-    }
-
-
-    public String getEntityClass() {
-        entityClass = this.getClass().toString();
-        return entityClass;
-    }
-
-    public void setEntityClass(String entityClass) {
-        this.entityClass = entityClass;
-    }
-//
-//    public Department getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(Department department) {
-//        this.department = department;
-//    }
 }

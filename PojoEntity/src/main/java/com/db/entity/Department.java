@@ -30,13 +30,8 @@ public class Department implements Serializable {
     //Main Properties   
     Long id;
     String departmentCode;
-    String name;
-    String sName;
-    String tName;
-    String printingName;
-    String address;
-    String telephone1;
-    String telephone2;
+    String name;   
+    String address; 
     String fax;
     String email;
     @ManyToOne
@@ -46,16 +41,7 @@ public class Department implements Serializable {
     @Enumerated(EnumType.STRING)
     DepartmentType departmentType;
     @ManyToOne
-    Department sampleDepartment;
-    @ManyToOne
-    Department labDepartment;
-
-    @ManyToOne
-    Institution sampleInstitution;
-    @ManyToOne
-    Institution labInstitution;
-//     double maxDiscount;
-
+    Institution sampleInstitution; 
     //Created Properties
     @ManyToOne
     WebUser creater;
@@ -69,26 +55,6 @@ public class Department implements Serializable {
     Date retiredAt;
     String retireComments;
 
-    double margin;
-    double pharmacyMarginFromPurchaseRate;
-
-    public double getPharmacyMarginFromPurchaseRate() {
-        return pharmacyMarginFromPurchaseRate;
-    }
-
-    public void setPharmacyMarginFromPurchaseRate(double pharmacyMarginFromPurchaseRate) {
-        this.pharmacyMarginFromPurchaseRate = pharmacyMarginFromPurchaseRate;
-    }
-    
-    
-
-    public double getMargin() {
-        return margin;
-    }
-
-    public void setMargin(double margin) {
-        this.margin = margin;
-    }
 
     public Institution getSampleInstitution() {
         return sampleInstitution;
@@ -96,14 +62,6 @@ public class Department implements Serializable {
 
     public void setSampleInstitution(Institution sampleInstitution) {
         this.sampleInstitution = sampleInstitution;
-    }
-
-    public Institution getLabInstitution() {
-        return labInstitution;
-    }
-
-    public void setLabInstitution(Institution labInstitution) {
-        this.labInstitution = labInstitution;
     }
 
     public Long getId() {
@@ -211,44 +169,12 @@ public class Department implements Serializable {
         this.name = name;
     }
 
-    public String getsName() {
-        return sName;
-    }
-
-    public void setsName(String sName) {
-        this.sName = sName;
-    }
-
-    public String gettName() {
-        return tName;
-    }
-
-    public void settName(String tName) {
-        this.tName = tName;
-    }
-
     public DepartmentType getDepartmentType() {
         return departmentType;
     }
 
     public void setDepartmentType(DepartmentType departmentType) {
         this.departmentType = departmentType;
-    }
-
-    public Department getSampleDepartment() {
-        return sampleDepartment;
-    }
-
-    public void setSampleDepartment(Department sampleDepartment) {
-        this.sampleDepartment = sampleDepartment;
-    }
-
-    public Department getLabDepartment() {
-        return labDepartment;
-    }
-
-    public void setLabDepartment(Department labDepartment) {
-        this.labDepartment = labDepartment;
     }
 
     public String getDepartmentCode() {
@@ -259,21 +185,6 @@ public class Department implements Serializable {
         this.departmentCode = departmentCode;
     }
 
-//    public double getMaxDiscount() {
-//        return maxDiscount;
-//    }
-//
-//    public void setMaxDiscount(double maxDiscount) {
-//        this.maxDiscount = maxDiscount;
-//    }
-    public String getPrintingName() {
-        return printingName;
-    }
-
-    public void setPrintingName(String printingName) {
-        this.printingName = printingName;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -281,23 +192,7 @@ public class Department implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public String getTelephone1() {
-        return telephone1;
-    }
-
-    public void setTelephone1(String telephone1) {
-        this.telephone1 = telephone1;
-    }
-
-    public String getTelephone2() {
-        return telephone2;
-    }
-
-    public void setTelephone2(String telephone2) {
-        this.telephone2 = telephone2;
-    }
-
+ 
     public String getFax() {
         return fax;
     }

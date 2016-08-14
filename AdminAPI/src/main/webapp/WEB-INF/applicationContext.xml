@@ -34,7 +34,8 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">none</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            <!-- create-drop,create,update,validate-->
             </props>
         </property>    
 
@@ -44,7 +45,6 @@
                 <value>com.db.entity.Department</value>
                 <value>com.db.entity.Institution</value>
                 <value>com.db.entity.Person</value>
-                <value>com.db.entity.Speciality</value>
                 <value>com.db.entity.Staff</value>
                 <value>com.db.entity.WebUser</value>
             </list>

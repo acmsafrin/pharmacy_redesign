@@ -1,5 +1,9 @@
 angular.module('institution.controller', []).controller('institution', ['$scope', '$state', 'Institution', function($scope, $state, Institution) {
-        
+        $scope.institutionTypes = [{name: 'Manufacturer', value: 'Manufacturer'}, {name: 'Importer', value: 'Importer'},
+            {name: 'CreditCompany', value: 'CreditCompany'}, {name: 'Bank', value: 'Bank'},
+            {name: 'Lab', value: 'Lab'}, {name: 'Hospital', value: 'Hospital'},
+            {name: 'Dealer', value: 'Dealer'}];
+ 
         $scope.view = function(id) {
             $scope.current = Institution.REST.get({id: id});
         }

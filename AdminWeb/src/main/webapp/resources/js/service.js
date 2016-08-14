@@ -17,7 +17,7 @@ angular.module('pharmacyApp.services', [])
                     })
                 }
             }])
-        .factory('Institution', ['$resource','$q','$http', function($resource,$q,$http) {
+        .factory('Institution', ['$resource', '$q', '$http', function($resource, $q, $http) {
                 return{
                     REST: $resource('http://localhost:8080/AdminAPI/institution/:id', {id: '@id'}, {
                         update: {
@@ -31,7 +31,7 @@ angular.module('pharmacyApp.services', [])
                             $http.get('http://localhost:8080/AdminAPI/institution/name/' + query)
                                     .success(function(data) {
                                         deferred.resolve(angular.forEach(data, function(obj, key) {
-                                            return{value: {id:obj.id},
+                                            return{value: {id: obj.id},
                                                 name: obj.name
                                             }
                                         }));
@@ -41,6 +41,15 @@ angular.module('pharmacyApp.services', [])
                             return deferred.promise;
                         }
                     }
+                }
+            }])
+        .factory('Webuser', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/AdminAPI/webuser/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
                 }
             }]);
          

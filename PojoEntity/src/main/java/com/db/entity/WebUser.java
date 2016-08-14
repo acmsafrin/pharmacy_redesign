@@ -10,6 +10,7 @@ package com.db.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class WebUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;   
     String webUserPassword;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Person webUserPerson;
     //Main Properties
     @Column(unique = true, nullable = false)

@@ -1,13 +1,11 @@
 <div ng-cloak="">
     <md-content>       
-           <md-autocomplete   id="institution_autocomplete" 
-                              md-no-cache="true"
+           <md-autocomplete   md-no-cache="true"
                               md-selected-item="current.institution" 
                               md-search-text="current.searchText"
                               md-items="item in institutionFilter.filterByName(current.searchText)"                               
                               md-item-text="item.name"
-                              md-selected-item-change="selectedItemChange()"
-                              placeholder="Type Institution Name!">
+                              placeholder="Institution Name!">
                 <md-item-template>
                     <span md-highlight-text="current.searchText" md-highlight-flags="^i">{{item.name}}</span>
                 </md-item-template>

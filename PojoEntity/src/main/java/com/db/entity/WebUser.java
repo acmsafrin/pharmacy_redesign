@@ -7,7 +7,6 @@
  */
 package com.db.entity;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -21,7 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
- * 
+ *
  * @author ACM Safrin
  */
 @Entity
@@ -30,53 +29,33 @@ public class WebUser implements Serializable {
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;   
-    String webUserPassword;
+    private Long id;
+    private String webUserPassword;
     @OneToOne(cascade = CascadeType.ALL)
-    Person webUserPerson;
+    private Person webUserPerson;
     //Main Properties
     @Column(unique = true, nullable = false)
-    String name;
-    String description;
+    private String name;
+    private String description;
     //Created Properties
     @ManyToOne
-    WebUser creater;
+    private WebUser creater;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
+    private Date createdAt;
     //Retairing properties
-    boolean retired;
+    private boolean retired;
     @ManyToOne
-    WebUser retirer;
+    private WebUser retirer;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
-    //Activation properties
-    boolean activated;
+    private Date retiredAt;
+    private String retireComments;
+    private String email;
+    private String telNo;
     @ManyToOne
-    WebUser activator;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date activatedAt;
-    String activateComments;
-    String primeTheme;
-    String defLocale;
-    String email;
-    String telNo;
+    private Institution institution;
     @ManyToOne
-    Institution institution;
-    @ManyToOne
-    Department department;
-    @ManyToOne
-    Staff staff;
-
-    String code;
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
+    private Department department;
+    private String code;
 
     public WebUser() {
     }
@@ -112,22 +91,6 @@ public class WebUser implements Serializable {
 
     public void setTelNo(String telNo) {
         this.telNo = telNo;
-    }
-
-    public String getDefLocale() {
-        return defLocale;
-    }
-
-    public void setDefLocale(String defLocale) {
-        this.defLocale = defLocale;
-    }
-
-    public String getPrimeTheme() {
-        return primeTheme;
-    }
-
-    public void setPrimeTheme(String primeTheme) {
-        this.primeTheme = primeTheme;
     }
 
     public Date getCreatedAt() {
@@ -218,40 +181,6 @@ public class WebUser implements Serializable {
         this.webUserPerson = webUserPerson;
     }
 
-   
-    public String getActivateComments() {
-        return activateComments;
-    }
-
-    public void setActivateComments(String activateComments) {
-        this.activateComments = activateComments;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
-    public Date getActivatedAt() {
-        return activatedAt;
-    }
-
-    public void setActivatedAt(Date activatedAt) {
-        this.activatedAt = activatedAt;
-    }
-
-    public WebUser getActivator() {
-        return activator;
-    }
-
-    public void setActivator(WebUser activator) {
-        this.activator = activator;
-    }
-
-    
     @Override
     public int hashCode() {
         int hash = 0;

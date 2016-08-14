@@ -1,5 +1,5 @@
-angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'Webuser', function($scope, $state, Webuser) {
-        
+angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'Webuser','Institution', function($scope, $state, Webuser,Institution) {
+        $scope.institutionFilter = Institution.FILTER;
         $scope.view = function(id) {
             $scope.current = Webuser.REST.get({id: id});
         }
@@ -19,7 +19,6 @@ angular.module('webuser.controller', []).controller('webuser', ['$scope', '$stat
         };
 
         $scope.save = function() {   
-            console.log(JSON.stringify($scope.current))
             if (angular.isUndefined($scope.current.id)) {
                 $scope.current.$save(function() {
                     $state.reload();

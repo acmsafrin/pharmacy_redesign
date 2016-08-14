@@ -31,17 +31,11 @@ public class Department implements Serializable {
     Long id;
     String departmentCode;
     String name;   
-    String address; 
-    String fax;
-    String email;
+    String phone;  
     @ManyToOne
-    Institution institution;
-    @ManyToOne
-    Department superDepartment;
+    Institution institution;   
     @Enumerated(EnumType.STRING)
     DepartmentType departmentType;
-    @ManyToOne
-    Institution sampleInstitution; 
     //Created Properties
     @ManyToOne
     WebUser creater;
@@ -56,14 +50,7 @@ public class Department implements Serializable {
     String retireComments;
 
 
-    public Institution getSampleInstitution() {
-        return sampleInstitution;
-    }
-
-    public void setSampleInstitution(Institution sampleInstitution) {
-        this.sampleInstitution = sampleInstitution;
-    }
-
+  
     public Long getId() {
         return id;
     }
@@ -105,14 +92,7 @@ public class Department implements Serializable {
         this.institution = institution;
     }
 
-    public Department getSuperDepartment() {
-        return superDepartment;
-    }
-
-    public void setSuperDepartment(Department superDepartment) {
-        this.superDepartment = superDepartment;
-    }
-
+ 
     public WebUser getCreater() {
         return creater;
     }
@@ -185,27 +165,12 @@ public class Department implements Serializable {
         this.departmentCode = departmentCode;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
- 
-    public String getFax() {
-        return fax;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

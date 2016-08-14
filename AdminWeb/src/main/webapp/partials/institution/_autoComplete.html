@@ -1,15 +1,18 @@
 <div ng-cloak="">
     <md-content>       
-           <md-autocomplete   md-selected-item="current.institution" 
-                              md-search-text="searchText"
-                              md-items="item in institutionFilter.filterByName(searchText)"                               
-                              md-item-text="item.name" md-min-length="2" 
+           <md-autocomplete   id="institution_autocomplete" 
+                              md-no-cache="true"
+                              md-selected-item="current.institution" 
+                              md-search-text="current.searchText"
+                              md-items="item in institutionFilter.filterByName(current.searchText)"                               
+                              md-item-text="item.name"
+                              md-selected-item-change="selectedItemChange()"
                               placeholder="Type Institution Name!">
                 <md-item-template>
-                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+                    <span md-highlight-text="current.searchText" md-highlight-flags="^i">{{item.name}}</span>
                 </md-item-template>
                 <md-not-found>
-                    No institution matching "{{searchText}}" were found.          
+                    No institution matching "{{current.searchText}}" were found.          
                 </md-not-found>
             </md-autocomplete>
 

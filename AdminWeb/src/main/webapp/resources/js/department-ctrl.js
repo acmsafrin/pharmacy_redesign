@@ -6,13 +6,8 @@ angular.module('department.controller', []).controller('department', ['$scope', 
         }
 
         $scope.add = function() {            
-            $scope.current = new Department.REST(); 
-            $scope.current.institution = undefined;
-            $scope.searchText ='';
-            
+            $scope.current = new Department.REST();  
         }
-        
-        
         
         $scope.load = function() {
            $scope.list = Department.REST.query();
@@ -35,7 +30,7 @@ angular.module('department.controller', []).controller('department', ['$scope', 
                 });
             }
         }
-
+       
         $scope.add();
         $scope.load();
     }]);

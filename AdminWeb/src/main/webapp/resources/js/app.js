@@ -2,7 +2,7 @@ angular.module('pharmacyApp', ['ui.router', 'ngResource',
     'ngMaterial', 'ngMessages',
     'category.controller','department.controller',
     'institution.controller','webuser.controller',
-    'pharmacyApp.services']);
+    'pharmacyApp.services','pharmacyApp.factories']);
 
 angular.module('pharmacyApp').config(['$stateProvider',function($stateProvider) {
   //Category

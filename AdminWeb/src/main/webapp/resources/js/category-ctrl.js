@@ -1,4 +1,4 @@
-angular.module('category.controller', []).controller('category', ['$scope', '$state', 'Category', function($scope, $state, Category) {
+angular.module('category.controller', []).controller('category', ['$scope', '$state','Session', 'Category', function($scope, $state,Session, Category) {
         
         $scope.view = function(id) {
             $scope.current = Category.REST.get({id: id});
@@ -6,6 +6,7 @@ angular.module('category.controller', []).controller('category', ['$scope', '$st
 
         $scope.add = function() {
             $scope.current = new Category.REST();
+            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -13,12 +14,13 @@ angular.module('category.controller', []).controller('category', ['$scope', '$st
         }
 
         $scope.delete = function() {
-            $scope.$delete(function() {
+            $scope.current.retirer=Session.getLoggedUser();
+            $scope.current.$delete(function() {
                 $state.reload();
             });
         };
 
-        $scope.save = function() {           
+        $scope.save = function() {   
             if (angular.isUndefined($scope.current.id)) {
                 $scope.current.$save(function() {
                     $state.reload();

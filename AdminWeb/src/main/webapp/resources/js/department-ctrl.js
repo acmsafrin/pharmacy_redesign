@@ -1,4 +1,4 @@
-angular.module('department.controller', []).controller('department', ['$scope', '$state', 'Department','Institution', function($scope, $state, Department,Institution) {
+angular.module('department.controller', []).controller('department', ['$scope', '$state','Session', 'Department','Institution', function($scope, $state,Session, Department,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         
         $scope.view = function(id) {
@@ -7,6 +7,7 @@ angular.module('department.controller', []).controller('department', ['$scope', 
 
         $scope.add = function() {            
             $scope.current = new Department.REST();  
+            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -14,7 +15,8 @@ angular.module('department.controller', []).controller('department', ['$scope', 
         }
 
         $scope.delete = function() {
-            $scope.$delete(function() {
+            $scope.current.retirer=Session.getLoggedUser();
+            $scope.current.$delete(function() {
                 $state.reload();
             });
         };

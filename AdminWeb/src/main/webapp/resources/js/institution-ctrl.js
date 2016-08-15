@@ -1,4 +1,4 @@
-angular.module('institution.controller', []).controller('institution', ['$scope', '$state', 'Institution', function($scope, $state, Institution) {
+angular.module('institution.controller', []).controller('institution', ['$scope', '$state','Session', 'Institution', function($scope, $state,Session, Institution) {
         $scope.institutionTypes = [{name: 'Manufacturer', value: 'Manufacturer'}, {name: 'Importer', value: 'Importer'},
             {name: 'CreditCompany', value: 'CreditCompany'}, {name: 'Bank', value: 'Bank'},
             {name: 'Lab', value: 'Lab'}, {name: 'Hospital', value: 'Hospital'},
@@ -10,6 +10,7 @@ angular.module('institution.controller', []).controller('institution', ['$scope'
 
         $scope.add = function() {
             $scope.current = new Institution.REST();
+            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -17,7 +18,8 @@ angular.module('institution.controller', []).controller('institution', ['$scope'
         }
 
         $scope.delete = function() {
-            $scope.$delete(function() {
+            $scope.current.retirer=Session.getLoggedUser();
+            $scope.current.$delete(function() {
                 $state.reload();
             });
         };

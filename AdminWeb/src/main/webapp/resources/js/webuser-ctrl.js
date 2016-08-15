@@ -1,4 +1,4 @@
-angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'Webuser','Institution', function($scope, $state, Webuser,Institution) {
+angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state','Session', 'Webuser','Institution', function($scope, $state,Session, Webuser,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         $scope.view = function(id) {
             $scope.current = Webuser.REST.get({id: id});
@@ -6,6 +6,7 @@ angular.module('webuser.controller', []).controller('webuser', ['$scope', '$stat
 
         $scope.add = function() {
             $scope.current = new Webuser.REST();
+            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -13,7 +14,8 @@ angular.module('webuser.controller', []).controller('webuser', ['$scope', '$stat
         }
 
         $scope.delete = function() {
-            $scope.$delete(function() {
+            $scope.current.retirer=Session.getLoggedUser();
+            $scope.current.$delete(function() {
                 $state.reload();
             });
         };

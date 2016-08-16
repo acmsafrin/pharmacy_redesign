@@ -15,6 +15,7 @@ angular.module('category.controller', []).controller('category', ['$scope', '$st
 
         $scope.delete = function() {
             $scope.current.retirer=Session.getLoggedUser();
+            console.log(JSON.stringify($scope.current));
             $scope.current.$delete(function() {
                 $state.reload();
             });

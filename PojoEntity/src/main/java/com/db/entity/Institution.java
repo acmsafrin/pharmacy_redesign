@@ -126,7 +126,7 @@ public class Institution implements Serializable {
         return retired;
     }
 
-    public void setRetired(boolean retired) {
+    public void setRetired(Boolean retired) {
         this.retired = retired;
     }
 

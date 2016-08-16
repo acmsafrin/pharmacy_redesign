@@ -5,11 +5,10 @@
  */
 package com.db.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -38,17 +37,23 @@ public class AbstractFacade<T> {
     }
 
     public void save(T t) {
+        try {
+            t.getClass().getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         getHibernateTemplate().save(t);
     }
 
     public T find(Long id) {
         return getHibernateTemplate().get(entityClass, id);
     }
-    
-    
+
     public List<T> findByName(String name) {
-         List<T> list = (List<T>) (getHibernateTemplate().find(" from " + entityClass.getSimpleName()+" e where e.name like '%"+name+"%'"));
-         return list;
+        String sql=" from " + entityClass.getSimpleName() + " e where e.retired=false "
+                + " and e.name like '%" + name + "%'";        
+        return this.findBySQL(sql);
     }
 
     public void refresh(T entity) {
@@ -61,12 +66,20 @@ public class AbstractFacade<T> {
     }
 
     public void delete(T entity) {
-        getHibernateTemplate().delete(entity);
+        //getHibernateTemplate().delete(entity);
+        try {
+            entity.getClass().getDeclaredMethod("setRetired", Boolean.class).invoke(entity, true);
+            entity.getClass().getDeclaredMethod("setRetiredAt", Date.class).invoke(entity, new Date());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.update(entity);
     }
 
     public List<T> findAll() {
-        List<T> list = (List<T>) (getHibernateTemplate().find(" from " + entityClass.getSimpleName()));
-        return list;
+        String sql = " from " + entityClass.getSimpleName() + " where retired=false ";
+        return this.findBySQL(sql);
     }
 
     public List<T> findBySQL(String temSQL) {

@@ -1,11 +1,14 @@
 <div class="my-list-table">
 <table class="table table-striped" >
     <tr>
-        <td><h4>Category Management</h4></td>
-        <td></td>
+        <td colspan="2"><h4>Category Management</h4></td>
     </tr>
-    <tr ng-click="view(option.id)" ng-repeat="option in list">
-        <td>{{option.id}}</td>
+    <tr>
+        <td><input type="text" class="form-control"  placeholder="Code" ng-model="search.code"></td>
+        <td><input type="text" class="form-control"  placeholder="Name" ng-model="search.name"></td>
+    </tr>
+    <tr ng-click="view(option.id)" ng-repeat="option in list | filter:search:strict">
+        <td>{{option.code}}</td>
         <td>{{option.name}}</td>       
     </tr>
 </table>

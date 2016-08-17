@@ -7,6 +7,7 @@ package com.service;
 
 import com.db.dao.AbstractFacade;
 import com.util.GsonUtil;
+import java.util.Date;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,13 +34,18 @@ public class AbstractRestService<T> {
     public String find(long id) {
         return GsonUtil.toJson(abstractFacade.find(id));
     }
-    
-     public String findByName(String name) {
+
+    public String findByName(String name) {
         return GsonUtil.toJson(abstractFacade.findByName(name));
     }
 
     @Transactional(readOnly = false)
     public void save(T t) {
+        try {
+            t.getClass().getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         abstractFacade.save(t);
     }
 
@@ -51,7 +57,15 @@ public class AbstractRestService<T> {
     @Transactional(readOnly = false)
     public void delete(long id) {
         T t = (T) abstractFacade.find(id);
-        abstractFacade.delete(t);
+        
+        try {
+            t.getClass().getDeclaredMethod("setRetired", Boolean.class).invoke(t, true);
+            t.getClass().getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        abstractFacade.update(t);
     }
 
 }

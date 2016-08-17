@@ -5,7 +5,6 @@
  */
 package com.db.dao;
 
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -36,13 +35,7 @@ public class AbstractFacade<T> {
         this.hibernateTemplate = hibernateTemplate;
     }
 
-    public void save(T t) {
-        try {
-            t.getClass().getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void save(T t) {      
         getHibernateTemplate().save(t);
     }
 
@@ -66,15 +59,7 @@ public class AbstractFacade<T> {
     }
 
     public void delete(T entity) {
-        //getHibernateTemplate().delete(entity);
-        try {
-            entity.getClass().getDeclaredMethod("setRetired", Boolean.class).invoke(entity, true);
-            entity.getClass().getDeclaredMethod("setRetiredAt", Date.class).invoke(entity, new Date());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.update(entity);
+        getHibernateTemplate().delete(entity);       
     }
 
     public List<T> findAll() {

@@ -27,6 +27,6 @@ angular.module('pharmacyApp').config(['$stateProvider',function($stateProvider) 
     controller: 'webuser'
   })
 }]).run(['$state','$http',function($state,$http) {
-  $http.defaults.headers.common['Authorization'] = 'Basic ' + 'YWRtaW46YWRtaW4=';
+  //$http.defaults.headers.common['Authorization'] = 'Basic ' + 'YWRtaW46YWRtaW4=';
   $state.go('category'); //make a transition to movies state when app starts  
 }]);

@@ -60,7 +60,7 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String save(@RequestBody Category entity) {
-        String result;
+        String result;        
         try {
             service.save(entity);
             result = GsonUtil.toJson(new SuccesStatus());

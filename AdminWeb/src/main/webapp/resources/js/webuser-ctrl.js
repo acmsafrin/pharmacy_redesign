@@ -1,4 +1,4 @@
-angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state','Session', 'Webuser','Institution', function($scope, $state,Session, Webuser,Institution) {
+angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'Webuser','Institution', function($scope, $state,Webuser,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         $scope.view = function(id) {
             $scope.current = Webuser.REST.get({id: id});

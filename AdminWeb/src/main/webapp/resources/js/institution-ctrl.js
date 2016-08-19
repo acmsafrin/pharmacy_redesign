@@ -1,4 +1,4 @@
-angular.module('institution.controller', []).controller('institution', ['$scope', '$state','Session', 'Institution', function($scope, $state,Session, Institution) {
+angular.module('institution.controller', []).controller('institution', ['$scope', '$state','Institution', function($scope, $state,Institution) {
         $scope.institutionTypes = [{name: 'Manufacturer', value: 'Manufacturer'}, {name: 'Importer', value: 'Importer'},
             {name: 'CreditCompany', value: 'CreditCompany'}, {name: 'Bank', value: 'Bank'},
             {name: 'Lab', value: 'Lab'}, {name: 'Hospital', value: 'Hospital'},

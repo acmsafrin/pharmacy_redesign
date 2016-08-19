@@ -1,4 +1,4 @@
-angular.module('department.controller', []).controller('department', ['$scope', '$state','Session', 'Department','Institution', function($scope, $state,Session, Department,Institution) {
+angular.module('department.controller', []).controller('department', ['$scope', '$state','Department','Institution', function($scope, $state,Department,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         
         $scope.view = function(id) {

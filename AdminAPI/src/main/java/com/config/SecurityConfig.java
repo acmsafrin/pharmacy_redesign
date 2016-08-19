@@ -7,7 +7,7 @@ package com.config;
 
 import com.db.dao.WebUserFacade;
 import com.db.entity.WebUser;
-import com.service.WebUserService;
+import com.service.ApplicationSingleton;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
 
 /**
  *
@@ -29,24 +28,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     WebUserFacade webUserFacade;
-    
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {                        
-        List<WebUser> list=webUserFacade.findAll();
-        InMemoryUserDetailsManagerConfigurer imudmc= auth.inMemoryAuthentication();
-        for(WebUser w:list){
+    ApplicationSingleton applicationSingleton;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        List<WebUser> list = webUserFacade.findAll();
+        InMemoryUserDetailsManagerConfigurer imudmc = auth.inMemoryAuthentication();
+        for (WebUser w : list) {
             imudmc.withUser(w.getName()).password(w.getWebUserPassword()).roles("ADMIN");
+            applicationSingleton.getUserMap().put(w.getName(), w);
         }
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        
+        http.csrf().disable();
         http.authorizeRequests()
-		.antMatchers("/*").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/*").access("hasRole('ROLE_ADMIN')")
                 //.antMatchers("/signup", "/about").permitAll() // 
-	//	.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
-		.and().httpBasic();
+                //	.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
+                .and().httpBasic();
     }
 
     @Override

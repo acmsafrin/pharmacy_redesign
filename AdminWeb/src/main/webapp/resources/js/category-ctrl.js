@@ -1,4 +1,4 @@
-angular.module('category.controller', []).controller('category', ['$scope', '$state','Session', 'Category', function($scope, $state,Session, Category) {
+angular.module('category.controller', []).controller('category', ['$scope', '$state', 'Category', function($scope, $state, Category) {
         
         $scope.view = function(id) {
             $scope.current = Category.REST.get({id: id});
@@ -6,16 +6,13 @@ angular.module('category.controller', []).controller('category', ['$scope', '$st
 
         $scope.add = function() {
             $scope.current = new Category.REST();
-            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
            $scope.list = Category.REST.query();
         }
 
-        $scope.delete = function() {
-            $scope.current.retirer=Session.getLoggedUser();
-            console.log(JSON.stringify($scope.current));
+        $scope.delete = function() {           
             $scope.current.$delete(function() {
                 $state.reload();
             });

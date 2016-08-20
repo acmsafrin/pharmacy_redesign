@@ -1,4 +1,4 @@
-angular.module('institution.controller', []).controller('institution', ['$scope', '$state','Institution', function($scope, $state,Institution) {
+angular.module('institution.controller', []).controller('institution', ['$scope', '$state','ReloadList','Institution', function($scope, $state,ReloadList,Institution) {
         $scope.institutionTypes = [{name: 'Manufacturer', value: 'Manufacturer'}, {name: 'Importer', value: 'Importer'},
             {name: 'CreditCompany', value: 'CreditCompany'}, {name: 'Bank', value: 'Bank'},
             {name: 'Lab', value: 'Lab'}, {name: 'Hospital', value: 'Hospital'},
@@ -10,7 +10,6 @@ angular.module('institution.controller', []).controller('institution', ['$scope'
 
         $scope.add = function() {
             $scope.current = new Institution.REST();
-            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -18,20 +17,19 @@ angular.module('institution.controller', []).controller('institution', ['$scope'
         }
 
         $scope.delete = function() {
-            $scope.current.retirer=Session.getLoggedUser();
-            $scope.current.$delete(function() {
-                $state.reload();
+            $scope.current.$delete(function(res) {
+                ReloadList.reload(res);
             });
         };
 
         $scope.save = function() {           
             if (angular.isUndefined($scope.current.id)) {
-                $scope.current.$save(function() {
-                    $state.reload();
+                $scope.current.$save(function(res) {
+                    ReloadList.reload(res);
                 });
             } else {
-                $scope.current.$update(function() {
-                    $state.reload();
+                $scope.current.$update(function(res) {
+                    ReloadList.reload(res);
                 });
             }
         }

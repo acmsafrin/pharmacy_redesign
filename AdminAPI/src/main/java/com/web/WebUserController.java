@@ -75,8 +75,7 @@ public class WebUserController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody WebUser entity) {
-        System.err.println("Update "+entity.getWebUserPerson().getName());
+    String save(@RequestBody WebUser entity) {       
         String result;
         try {
             service.save(entity);
@@ -90,7 +89,6 @@ public class WebUserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String update(@PathVariable("id") long id, @RequestBody WebUser entity) {
-        System.err.println("Update "+entity.getWebUserPerson().getName());
         String result;
         try {
             service.update(entity);

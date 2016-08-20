@@ -1,4 +1,4 @@
-angular.module('department.controller', []).controller('department', ['$scope', '$state','Department','Institution', function($scope, $state,Department,Institution) {
+angular.module('department.controller', []).controller('department', ['$scope', '$state','ReloadList','Department','Institution', function($scope, $state,ReloadList,Department,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         
         $scope.view = function(id) {
@@ -7,7 +7,6 @@ angular.module('department.controller', []).controller('department', ['$scope', 
 
         $scope.add = function() {            
             $scope.current = new Department.REST();  
-            $scope.current.creater=Session.getLoggedUser();
         }
         
         $scope.load = function() {
@@ -15,20 +14,19 @@ angular.module('department.controller', []).controller('department', ['$scope', 
         }
 
         $scope.delete = function() {
-            $scope.current.retirer=Session.getLoggedUser();
-            $scope.current.$delete(function() {
-                $state.reload();
+            $scope.current.$delete(function(res) {
+                ReloadList.reload(res);
             });
         };
 
         $scope.save = function() {           
             if (angular.isUndefined($scope.current.id)) {
-                $scope.current.$save(function() {
-                    $state.reload();
+                $scope.current.$save(function(res) {
+                    ReloadList.reload(res);
                 });
             } else {
-                $scope.current.$update(function() {
-                    $state.reload();
+                $scope.current.$update(function(res) {
+                    ReloadList.reload(res);
                 });
             }
         }

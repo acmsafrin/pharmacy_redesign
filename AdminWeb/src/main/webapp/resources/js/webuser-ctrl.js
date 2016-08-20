@@ -1,4 +1,4 @@
-angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'Webuser','Institution', function($scope, $state,Webuser,Institution) {
+angular.module('webuser.controller', []).controller('webuser', ['$scope', '$state', 'ReloadList', 'Webuser', 'Institution', function($scope, $state, ReloadList, Webuser, Institution) {
         $scope.institutionFilter = Institution.FILTER;
         $scope.view = function(id) {
             $scope.current = Webuser.REST.get({id: id});
@@ -6,28 +6,27 @@ angular.module('webuser.controller', []).controller('webuser', ['$scope', '$stat
 
         $scope.add = function() {
             $scope.current = new Webuser.REST();
-            $scope.current.creater=Session.getLoggedUser();
         }
-        
+
         $scope.load = function() {
-           $scope.list = Webuser.REST.query();
+            $scope.list = Webuser.REST.query();
         }
 
         $scope.delete = function() {
-            $scope.current.retirer=Session.getLoggedUser();
-            $scope.current.$delete(function() {
-                $state.reload();
+            $scope.current.$delete(function(res) {
+                ReloadList.reload(res);
             });
         };
 
-        $scope.save = function() {   
+        $scope.save = function() {
+            console.log($scope.current);
             if (angular.isUndefined($scope.current.id)) {
-                $scope.current.$save(function() {
-                    $state.reload();
+                $scope.current.$save(function(res) {
+                    ReloadList.reload(res);
                 });
             } else {
-                $scope.current.$update(function() {
-                    $state.reload();
+                $scope.current.$update(function(res) {
+                    ReloadList.reload(res);
                 });
             }
         }

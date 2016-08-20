@@ -112,15 +112,4 @@ public class WebUserController {
         return result;
     }
 
-    public WebUserService getService() {
-        return service;
-    }
-
-    public void setService(WebUserService service) {
-        this.service = service;
-    }
-
- 
-  
-
 }

@@ -96,12 +96,4 @@ public class CategoryController {
         return result;
     }
 
-    public CategoryService getCategoryService() {
-        return service;
-    }
-
-    public void setCategoryService(CategoryService categoryService) {
-        this.service = categoryService;
-    }
-
 }

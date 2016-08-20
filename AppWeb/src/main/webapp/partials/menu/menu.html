@@ -1,0 +1,52 @@
+<md-toolbar  ng-show="global.loaded" class="ng-hide md-menu-toolbar">
+    <div layout="row">
+        <md-toolbar-filler layout layout-align="center center">
+            <md-icon md-svg-icon="call:chat"></md-icon>
+        </md-toolbar-filler>
+        <div>
+            <h2 class="md-toolbar-tools">Pharmacy Management</h2>
+            <md-menu-bar>
+                <md-menu>
+                    <button ng-click="$mdOpenMenu()">
+                        Administration
+                    </button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ui-sref="category">
+                                Category
+                            </md-button>
+                        </md-menu-item>     
+                        <md-menu-item>
+                            <md-button ui-sref="department">
+                                Department
+                            </md-button>
+                        </md-menu-item>     
+                        <md-menu-item>
+                            <md-button ui-sref="institution">
+                                Institution
+                            </md-button>
+                        </md-menu-item>     
+                        <md-menu-item>
+                            <md-button ui-sref="webuser">
+                                Webuser
+                            </md-button>
+                        </md-menu-item>     
+                    </md-menu-content>
+                </md-menu>
+                <md-menu>
+                    <button ng-click="$mdOpenMenu()">
+                        Pharmacy
+                    </button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ui-sref="pharmaceuticalitemcategory">
+                                Pharmaceuticalitemcategory
+                            </md-button>
+                        </md-menu-item>     
+                    </md-menu-content>
+                </md-menu>
+            </md-menu-bar>
+
+        </div>
+    </div>
+</md-toolbar>

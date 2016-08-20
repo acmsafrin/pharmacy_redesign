@@ -5,10 +5,10 @@
  */
 package com.web;
 
-import com.db.entity.Institution;
+import com.db.entity.pharmacy.PharmaceuticalItemCategory;
 import com.pojo.ErrorStatus;
 import com.pojo.SuccesStatus;
-import com.service.InstitutionService;
+import com.service.PharmaceuticalItemCategoryService;
 import com.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ACM Safrin
  */
 @RestController
-@RequestMapping("/institution")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/institution/
-public class InstitutionController {
+@RequestMapping("/pharmaceuticalItemCategory")
+//url:http://localhost:8080/StudentRestApiHibernateSpring/pharmaceuticalItemCategory/
+public class PharmaceuticalItemCategoryController {
 
     @Autowired
-    private InstitutionService service;
+    private PharmaceuticalItemCategoryService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
@@ -38,7 +38,6 @@ public class InstitutionController {
         try {
             result = service.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 
@@ -57,24 +56,11 @@ public class InstitutionController {
 
         return result;
     }
-    
-    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-    public @ResponseBody
-    String filterByName(@PathVariable("name") String name) {
-        String result;
-        try {
-            result = service.findByName(name);
-        } catch (Exception e) {
-            result = GsonUtil.toJson(new ErrorStatus());
-        }
-
-        return result;
-    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody Institution entity) {
-        String result;
+    String save(@RequestBody PharmaceuticalItemCategory entity) {
+        String result;        
         try {
             service.save(entity);
             result = GsonUtil.toJson(new SuccesStatus());
@@ -86,7 +72,7 @@ public class InstitutionController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String update(@PathVariable("id") long id, @RequestBody Institution entity) {
+    String update(@PathVariable("id") long id, @RequestBody PharmaceuticalItemCategory entity) {
         String result;
         try {
             service.update(entity);
@@ -110,6 +96,5 @@ public class InstitutionController {
         return result;
     }
 
-      
 
 }

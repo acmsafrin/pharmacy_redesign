@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html data-ng-app="pharmacy">
+    <head lang="en">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>The Pharmacy Application</title>
+        <link rel="stylesheet" type="text/css" href="resources/lib/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/lib/angular-material.min.css"/>                
+        <link rel="stylesheet" type="text/css" href="resources/css/mycss.css"/> 
+    </head>
+    <body>
+    <div  class="col-sm-7" ng-include="'partials/menu/menu.html'"></div>
+
+    <div class="container">
+        <div class="row top-buffer">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div ui-view></div> <!-- This is where our views will load -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resources/lib/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="resources/lib/angular.min.js"></script>
+    <script type="text/javascript" src="resources/lib/angular-resource.min.js"></script>      
+    <script type="text/javascript" src="resources/lib/angular-ui-router.min.js"></script> 
+    <script type="text/javascript" src="resources/lib/angular-aria.min.js"></script> 
+    <script type="text/javascript" src="resources/lib/angular-animate.min.js"></script> 
+    <script type="text/javascript" src="resources/lib/angular-messages.min.js"></script>         
+    <script type="text/javascript" src="resources/lib/angular-material.min.js"></script>                 
+    <script type="text/javascript" src="resources/js/app.js"></script>     
+    <script type="text/javascript" src="resources/js/appconfig.js"></script>     
+    <script type="text/javascript" src="resources/js/factory.js"></script>
+    <script type="text/javascript" src="resources/js/service.js"></script>
+    <script type="text/javascript" src="resources/js/category-ctrl.js"></script>       
+    <script type="text/javascript" src="resources/js/department-ctrl.js"></script>
+    <script type="text/javascript" src="resources/js/institution-ctrl.js"></script>
+    <script type="text/javascript" src="resources/js/webuser-ctrl.js"></script>
+    <script type="text/javascript" src="resources/js/pharmacy/appconfig.js"></script>     
+    <script type="text/javascript" src="resources/js/pharmacy/factory.js"></script>
+    <script type="text/javascript" src="resources/js/pharmacy/pharmaceuticalitemcategory-ctrl.js"></script>
+    <!--<script type="text/javascript" src="AdminWeb/resources/js/app.min.js"></script>-->
+</body>
+</html>

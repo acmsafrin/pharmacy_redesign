@@ -96,14 +96,6 @@ public class DepartmentController {
         return result;
     }
 
-    public DepartmentService getService() {
-        return service;
-    }
-
-    public void setService(DepartmentService service) {
-        this.service = service;
-    }
-    
     
 
 }

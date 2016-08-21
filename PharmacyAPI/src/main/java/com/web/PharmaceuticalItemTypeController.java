@@ -5,10 +5,10 @@
  */
 package com.web;
 
-import com.db.entity.Category;
+import com.db.entity.pharmacy.PharmaceuticalItemType;
 import com.pojo.ErrorStatus;
 import com.pojo.SuccesStatus;
-import com.service.CategoryService;
+import com.service.PharmaceuticalItemTypeService;
 import com.util.GsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @param <S>
  */
 @RestController
-@RequestMapping("/category")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/category/
-public class CategoryController<S extends CategoryService> {
+@RequestMapping("/pharmaceuticalItemType")
+//url:http://localhost:8080/PharmacyAPI/pharmaceuticalItemType/
+public class PharmaceuticalItemTypeController<S extends PharmaceuticalItemTypeService> {
 
     @Autowired
     private S service;
@@ -60,7 +60,7 @@ public class CategoryController<S extends CategoryService> {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String save(@RequestBody Category entity) {
+    String save(@RequestBody PharmaceuticalItemType entity) {
         String result;        
         try {
             service.save(entity);
@@ -73,7 +73,7 @@ public class CategoryController<S extends CategoryService> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String update(@PathVariable("id") long id, @RequestBody Category entity) {
+    String update(@PathVariable("id") long id, @RequestBody PharmaceuticalItemType entity) {
         String result;
         try {
             service.update(entity);
@@ -96,5 +96,6 @@ public class CategoryController<S extends CategoryService> {
         }
         return result;
     }
+
 
 }

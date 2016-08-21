@@ -1,15 +1,15 @@
-angular.module('pharmacy.controllers').controller('pharmaceuticalitemcategory', ['$scope', 'ReloadList', 'Pharmaceuticalitemcategory', function($scope, ReloadList, Pharmaceuticalitemcategory) {
+angular.module('pharmacy.controllers').controller('pharmaceuticalitemtype', ['$scope', 'ReloadList', 'Pharmaceuticalitemtype', function($scope, ReloadList, Pharmaceuticalitemtype) {
 
         $scope.view = function(id) {
-            $scope.current = Pharmaceuticalitemcategory.REST.get({id: id});
+            $scope.current = Pharmaceuticalitemtype.REST.get({id: id});
         }
 
         $scope.add = function() {
-            $scope.current = new Pharmaceuticalitemcategory.REST();
+            $scope.current = new Pharmaceuticalitemtype.REST();
         }
 
         $scope.load = function() {
-            $scope.list = Pharmaceuticalitemcategory.REST.query();
+            $scope.list = Pharmaceuticalitemtype.REST.query();
         }
 
         $scope.delete = function() {

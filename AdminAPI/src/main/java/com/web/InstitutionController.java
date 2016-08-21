@@ -22,14 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author ACM Safrin
+ * @param <S>
+ * @param <E>
  */
 @RestController
 @RequestMapping("/institution")
 //url:http://localhost:8080/StudentRestApiHibernateSpring/institution/
-public class InstitutionController {
+public class InstitutionController<S extends InstitutionService> {
 
     @Autowired
-    private InstitutionService service;
+    private S service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody

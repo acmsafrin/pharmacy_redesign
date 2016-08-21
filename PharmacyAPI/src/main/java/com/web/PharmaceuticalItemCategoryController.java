@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author ACM Safrin
+ * @param <S>
  */
 @RestController
 @RequestMapping("/pharmaceuticalItemCategory")
-//url:http://localhost:8080/StudentRestApiHibernateSpring/pharmaceuticalItemCategory/
-public class PharmaceuticalItemCategoryController {
+//url:http://localhost:8080/PharmacyAPI/pharmaceuticalItemCategory/
+public class PharmaceuticalItemCategoryController<S extends PharmaceuticalItemCategoryService> {
 
     @Autowired
-    private PharmaceuticalItemCategoryService service;
+    private S service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody

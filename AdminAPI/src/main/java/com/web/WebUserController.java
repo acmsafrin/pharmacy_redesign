@@ -24,14 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author ACM Safrin
+ * @param <S>
+ * @param <E>
  */
 @RestController
 @RequestMapping("/webuser")
 //url:http://localhost:8080/StudentRestApiHibernateSpring/webuser/
-public class WebUserController {
+public class WebUserController<S extends WebUserService> {
 
     @Autowired
-    private WebUserService service;
+    private S service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody

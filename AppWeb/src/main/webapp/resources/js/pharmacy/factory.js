@@ -7,5 +7,14 @@ angular.module('pharmacy.factories')
                         }
                     })
                 }
+            }])
+        .factory('Pharmaceuticalitemtype', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/pharmaceuticalItemType/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
             }]);
         

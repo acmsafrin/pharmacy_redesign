@@ -5,8 +5,8 @@
  */
 package com.service;
 
-import com.db.dao.PharmaceuticalItemCategoryFacade;
-import com.db.entity.pharmacy.PharmaceuticalItemCategory;
+import com.db.dao.PharmaceuticalItemTypeFacade;
+import com.db.entity.pharmacy.PharmaceuticalItemType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
  * @author ACM Safrin
  */
 @Service
-public class PharmaceuticalItemCategoryService extends AbstractRestService<PharmaceuticalItemCategory> {
+public class PharmaceuticalItemTypeService extends AbstractRestService<PharmaceuticalItemType> {
 
     @Autowired
-    public void setAbstractFacade(PharmaceuticalItemCategoryFacade facade) {
+    public void setAbstractFacade(PharmaceuticalItemTypeFacade facade) {
         super.setAbstractFacade(facade); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/department")
 //url:http://localhost:8080/StudentRestApiHibernateSpring/department/
-public class DepartmentController {
+public class DepartmentController<S extends DepartmentService> {
 
     @Autowired
-    private DepartmentService service;
+    private S service;
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody

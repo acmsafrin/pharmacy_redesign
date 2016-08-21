@@ -1,5 +1,4 @@
 angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
-        //pharmaceuticalitemcategory
         $stateProvider.state('pharmaceuticalitemcategory', {
             url: '/pharmaceuticalitemcategory',
             templateUrl: 'partials/pharmacy/pharmaceuticalitemcategory/index.html',
@@ -8,5 +7,9 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             url: '/pharmaceuticalitemtype',
             templateUrl: 'partials/pharmacy/pharmaceuticalitemtype/index.html',
             controller: 'pharmaceuticalitemtype'
+        }).state('vtm', {
+            url: '/vtm',
+            templateUrl: 'partials/pharmacy/vtm/index.html',
+            controller: 'vtm'
         })
     }]);

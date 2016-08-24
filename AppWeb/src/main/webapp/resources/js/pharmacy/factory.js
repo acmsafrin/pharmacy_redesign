@@ -25,5 +25,14 @@ angular.module('pharmacy.factories')
                         }
                     })
                 }
+            }])
+        .factory('Vmp', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/vmp/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
             }]);
         

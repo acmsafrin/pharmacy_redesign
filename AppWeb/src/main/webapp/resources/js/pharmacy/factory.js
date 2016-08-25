@@ -34,5 +34,14 @@ angular.module('pharmacy.factories')
                         }
                     })
                 }
+            }])
+        .factory('Amp', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/amp/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
             }]);
         

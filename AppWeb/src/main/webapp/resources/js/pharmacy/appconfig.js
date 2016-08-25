@@ -15,5 +15,9 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             url: '/vmp',
             templateUrl: 'partials/pharmacy/vmp/index.html',
             controller: 'vmp'
+        }).state('amp', {
+            url: '/amp',
+            templateUrl: 'partials/pharmacy/amp/index.html',
+            controller: 'amp'
         })
     }]);

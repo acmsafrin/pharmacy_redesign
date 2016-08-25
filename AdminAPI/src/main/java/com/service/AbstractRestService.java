@@ -45,22 +45,20 @@ public class AbstractRestService<T> {
         return GsonUtil.toJson(abstractFacade.findByName(name));
     }
 
-    private void setCreaterDetail(T t, Class cls) throws Exception {
-        cls.getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
-        cls.getDeclaredMethod("setCreater", WebUser.class).invoke(t, getLoggedUser());
+    private void setCreaterDetail(T t, Class cls) {
+        try {
+            cls.getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
+            cls.getDeclaredMethod("setCreater", WebUser.class).invoke(t, getLoggedUser());
+        } catch (Exception e) {
+            if (cls.getSuperclass() != null) {
+                setCreaterDetail(t, cls.getSuperclass());
+            }
+        }
     }
 
     @Transactional(readOnly = false)
     public void save(T t) {
-        try {
-            setCreaterDetail(t, t.getClass());
-        } catch (Exception e) {
-            try {
-                setCreaterDetail(t, t.getClass().getSuperclass());
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
+        setCreaterDetail(t, t.getClass());
         abstractFacade.save(t);
     }
 
@@ -69,25 +67,23 @@ public class AbstractRestService<T> {
         abstractFacade.update(t);
     }
 
-    private void setRetireDetail(T t, Class cls) throws Exception {
-        cls.getDeclaredMethod("setRetired", Boolean.class).invoke(t, true);
-        cls.getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
-        cls.getDeclaredMethod("setRetirer", WebUser.class).invoke(t, getLoggedUser());
+    private void setRetireDetail(T t, Class cls) {
+        try {
+            cls.getDeclaredMethod("setRetired", Boolean.class).invoke(t, true);
+            cls.getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
+            cls.getDeclaredMethod("setRetirer", WebUser.class).invoke(t, getLoggedUser());
+        } catch (Exception e) {
+            if (cls.getSuperclass() != null) {
+                setRetireDetail(t, cls.getSuperclass());
+            }
+        }
     }
 
     @Transactional(readOnly = false)
     public void delete(long id) {
         T t = (T) abstractFacade.find(id);
 
-        try {
-            setRetireDetail(t, t.getClass());
-        } catch (Exception e) {
-            try {
-                setRetireDetail(t, t.getClass().getSuperclass());
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
+        setRetireDetail(t, t.getClass());
 
         abstractFacade.update(t);
     }

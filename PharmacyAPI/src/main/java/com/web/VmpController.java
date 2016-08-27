@@ -39,6 +39,7 @@ public class VmpController<S extends VmpService> {
         try {
             result = service.findAll();
         } catch (Exception e) {
+             e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

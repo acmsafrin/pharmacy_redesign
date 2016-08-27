@@ -43,5 +43,32 @@ angular.module('pharmacy.factories')
                         }
                     })
                 }
+            }])
+        .factory('Ampp', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/ampp/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
+            }])
+         .factory('Measurementunit', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/measurementUnit/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
+            }])
+        .factory('Frequencyunit', ['$resource', function($resource) {
+                return{
+                    REST: $resource('http://localhost:8080/PharmacyAPI/frequencyUnit /:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        }
+                    })
+                }
             }]);
         

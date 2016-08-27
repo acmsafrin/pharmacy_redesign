@@ -39,6 +39,7 @@ public class AmpController<S extends AmpService> {
         try {
             result = service.findAll();
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

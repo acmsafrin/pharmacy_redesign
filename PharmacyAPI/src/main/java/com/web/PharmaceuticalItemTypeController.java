@@ -39,6 +39,7 @@ public class PharmaceuticalItemTypeController<S extends PharmaceuticalItemTypeSe
         try {
             result = service.findAll();
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

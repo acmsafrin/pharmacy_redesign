@@ -19,5 +19,18 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             url: '/amp',
             templateUrl: 'partials/pharmacy/amp/index.html',
             controller: 'amp'
+        }).state('ampp', {
+            url: '/ampp',
+            templateUrl: 'partials/pharmacy/ampp/index.html',
+            controller: 'ampp'
+        }).state('measurementunit', {
+            url: '/measurementunit',
+            templateUrl: 'partials/pharmacy/measurementunit/index.html',
+            controller: 'measurementunit'
+        })
+        .state('frequencyunit', {
+            url: '/frequencyunit',
+            templateUrl: 'partials/pharmacy/frequencyunit/index.html',
+            controller: 'frequencyunit'
         })
     }]);

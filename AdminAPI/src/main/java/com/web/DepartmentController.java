@@ -38,6 +38,7 @@ public class DepartmentController<S extends DepartmentService> {
         try {
             result = service.findAll();
         } catch (Exception e) {
+             e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

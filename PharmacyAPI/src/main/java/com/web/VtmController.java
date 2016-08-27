@@ -39,6 +39,7 @@ public class VtmController<S extends VtmService> {
         try {
             result = service.findAll();
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

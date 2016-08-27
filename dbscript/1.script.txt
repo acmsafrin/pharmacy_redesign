@@ -1,0 +1,1 @@
+UPDATE item set `RETIRED`=true where `CATEGORY_ID` in (select `CATEGORY_ID` from category WHERE `DTYPE`='ConsumableCategory');

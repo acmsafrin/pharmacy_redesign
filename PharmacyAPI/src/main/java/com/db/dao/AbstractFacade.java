@@ -5,6 +5,7 @@
  */
 package com.db.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -65,8 +66,11 @@ public class AbstractFacade<T> {
     }
 
     public List<T> findAll() {
+        System.out.println("DAO START "+new Date());
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).add(Restrictions.eq("retired", false));
-        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
+        List<T> list= (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);        
+        System.out.println("DAO END "+new Date());
+        return list;
     }
 
     public List<T> findBySQL(String temSQL) {

@@ -9,6 +9,7 @@ import com.db.dao.AbstractFacade;
 import com.db.entity.WebUser;
 import com.util.GsonUtil;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +35,11 @@ public class AbstractRestService<T> {
     }
 
     public String findAll() {
-        return GsonUtil.toJson(abstractFacade.findAll());
+        List<T> list=abstractFacade.findAll();
+        System.out.println("JSON START "+list.size()+":::"+new Date());
+        String json= GsonUtil.toJson(list);
+        System.out.println("JSON END "+new Date());
+        return json;
     }
 
     public String find(long id) {
@@ -50,6 +55,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setCreater", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
+            e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setCreaterDetail(t, cls.getSuperclass());
             }
@@ -73,6 +79,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setRetirer", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
+            e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setRetireDetail(t, cls.getSuperclass());
             }

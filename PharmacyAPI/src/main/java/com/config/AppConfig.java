@@ -38,7 +38,7 @@ public class AppConfig {
 	private Properties getHibernateProperties() {
                 Properties prop = new Properties();
                 //prop.put("hibernate.format_sql", "true");
-                prop.put("hibernate.show_sql", "true");
+             //   prop.put("hibernate.show_sql", "true");
                 prop.put("hibernate.dialect",
                     "org.hibernate.dialect.MySQLDialect");
                 prop.put("hibernate.hbm2ddl.auto","update");
@@ -50,7 +50,7 @@ public class AppConfig {
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 	        ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/adminapi");
+		ds.setUrl("jdbc:mysql://localhost:3306/hmis");
 		ds.setUsername("root");
 		return ds;
 	}

@@ -39,6 +39,7 @@ public class CategoryController<S extends CategoryService> {
         try {
             result = service.findAll();
         } catch (Exception e) {
+             e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 

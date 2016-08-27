@@ -7,10 +7,9 @@
  */
 package com.db.entity;
 
-
-
 import com.enums.Title;
 import com.enums.Sex;
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -21,110 +20,122 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import javax.persistence.Transient;
 
 /**
- * 
+ *
  * @author ACM Safrin
  */
 @Entity
 public class Person implements Serializable {
 
-  
-
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Expose
     Long id;
-    String name;
-    String description;
-    String nic;
-    String address;
-    String fax;
-    String email;
-    String website;
-    String mobile;   
-    String phone;
-    String initials;
-    String surName;
-    String zoneCode;
-
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date dob;
-
-    //Created Properties
     @ManyToOne
     WebUser creater;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
-    //Retairing properties
-    boolean retired;
     @ManyToOne
     WebUser retirer;
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    Date dob;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    Date createdAt;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
     Date retiredAt;
-    String retireComments;   
-    @ManyToOne
-    Institution institution;
-    @ManyToOne
-    Department department;
+
     @Enumerated(EnumType.STRING)
+    @Expose
     Title title;
     @Enumerated(EnumType.STRING)
+    @Expose
     Sex sex;
-    @Transient
-    String nameWithTitle;
-   
 
-    public String getNameWithTitle() {
-        String temT = "";
-        Title t;
-        if (getName() != null) {
-            t = getTitle();
-            if (t == Title.Baby) {
-                temT = "Baby ";
-            } else if (t == Title.Dr) {
-                temT = "Dr. ";
-            } else if (t == Title.DrMiss) {
-                temT = "Dr(Miss). ";
-            } else if (t == Title.DrMrs) {
-                temT = "Dr(Mrs). ";
-            } else if (t == Title.DrMs) {
-                temT = "Dr(Ms). ";
-            } else if (t == Title.Hon) {
-                temT = "Hon. ";
-            } else if (t == Title.Master) {
-                temT = "Master. ";
-            } else if (t == Title.Miss) {
-                temT = "Miss. ";
-            } else if (t == Title.Mr) {
-                temT = "Mr. ";
-            } else if (t == Title.Mrs) {
-                temT = "Mrs. ";
-            } else if (t == Title.Ms) {
-                temT = "Ms. ";
-            } else if (t == Title.Prof) {
-                temT = "Prof. ";
-            } else if (t == Title.Rev) {
-                temT = "Rev. ";
-            } else if (t == Title.RtHon) {
-                temT = "Rt. Hon. ";
-            } else if (t == Title.RtRev) {
-                temT = "Rt. Rev. ";
-            } else {
-                temT = "";
-            }
+    @Expose
+    String name;
+    @Expose
+    String description;
+    @Expose
+    String nic;
+    @Expose
+    String address;
+    @Expose
+    String fax;
+    @Expose
+    String email;
+    @Expose
+    String website;
+    @Expose
+    String mobile;
+    @Expose
+    String phone;
+    @Expose
+    String initials;
+    @Expose
+    String surName;
+    @Expose
+    String zoneCode;
+    @Expose
+    boolean retired;
+    @Expose
+    String retireComments;
 
-            nameWithTitle = temT + getName();
-        }
-
-        return nameWithTitle;
-    }
-
-    public void setNameWithTitle(String nameWithTitle) {
-        this.nameWithTitle = nameWithTitle.toUpperCase();
-    }
-
+//    @Transient
+//    String nameWithTitle;
+//   
+//
+//    public String getNameWithTitle() {
+//        String temT = "";
+//        Title t;
+//        if (getName() != null) {
+//            t = getTitle();
+//            if (t == Title.Baby) {
+//                temT = "Baby ";
+//            } else if (t == Title.Dr) {
+//                temT = "Dr. ";
+//            } else if (t == Title.DrMiss) {
+//                temT = "Dr(Miss). ";
+//            } else if (t == Title.DrMrs) {
+//                temT = "Dr(Mrs). ";
+//            } else if (t == Title.DrMs) {
+//                temT = "Dr(Ms). ";
+//            } else if (t == Title.Hon) {
+//                temT = "Hon. ";
+//            } else if (t == Title.Master) {
+//                temT = "Master. ";
+//            } else if (t == Title.Miss) {
+//                temT = "Miss. ";
+//            } else if (t == Title.Mr) {
+//                temT = "Mr. ";
+//            } else if (t == Title.Mrs) {
+//                temT = "Mrs. ";
+//            } else if (t == Title.Ms) {
+//                temT = "Ms. ";
+//            } else if (t == Title.Prof) {
+//                temT = "Prof. ";
+//            } else if (t == Title.Rev) {
+//                temT = "Rev. ";
+//            } else if (t == Title.RtHon) {
+//                temT = "Rt. Hon. ";
+//            } else if (t == Title.RtRev) {
+//                temT = "Rt. Rev. ";
+//            } else {
+//                temT = "";
+//            }
+//
+//            nameWithTitle = temT + getName();
+//        }
+//
+//        return nameWithTitle;
+//    }
+//
+//    public void setNameWithTitle(String nameWithTitle) {
+//        this.nameWithTitle = nameWithTitle.toUpperCase();
+//    }
     public Sex getSex() {
         return sex;
     }
@@ -204,8 +215,6 @@ public class Person implements Serializable {
     public void setZoneCode(String zoneCode) {
         this.zoneCode = zoneCode;
     }
-    
-    
 
     public boolean isRetired() {
         return retired;
@@ -295,24 +304,6 @@ public class Person implements Serializable {
         this.mobile = mobile;
     }
 
-   
-
-    public Institution getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     public Title getTitle() {
         return title;
     }
@@ -344,6 +335,5 @@ public class Person implements Serializable {
     public void setNic(String nic) {
         this.nic = nic;
     }
-
 
 }

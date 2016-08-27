@@ -4,6 +4,7 @@
  */
 package com.db.entity.pharmacy;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -20,6 +21,7 @@ public class Amp extends PharmaceuticalItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @ManyToOne
+    @Expose
     private Vmp vmp;
 
     public Vmp getVmp() {

@@ -8,10 +8,11 @@ angular.module('pharmacy.services')
         .service('ReloadList', ['ResponseStatus','$state',function(ResponseStatus,$state) {
                 return{
                     reload: function(res) {
+                        console.log('Res Ponse '+JSON.stringify(res));
                         if (ResponseStatus.success.code == res.code) {
                             $state.reload();
                         } else {
-                            //Error Handle
+                           console.log('not reloaded');
                         }
                     }
                 }

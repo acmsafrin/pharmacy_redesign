@@ -66,11 +66,16 @@ public class FrequencyUnitController<S extends FrequencyUnitService> {
     String save(@RequestBody FrequencyUnit entity) {
         String result;        
         try {
+            System.err.println("1");
             service.save(entity);
+            System.err.println("2");
             result = GsonUtil.toJson(new SuccesStatus());
+            System.err.println("3");
         } catch (Exception e) {
+            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
+        System.err.println("Return : "+result);
         return result;
     }
 

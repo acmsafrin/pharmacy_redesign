@@ -4,12 +4,12 @@
  */
 package com.db.entity.pharmacy;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-
 
 /**
  *
@@ -18,9 +18,11 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Vmpp extends PharmaceuticalItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
-   
+
     @ManyToOne
+    @Expose
     Vmp vmp;
 
     @ManyToOne
@@ -33,10 +35,7 @@ public class Vmpp extends PharmaceuticalItem implements Serializable {
     public void setPackUnit(MeasurementUnit packUnit) {
         this.packUnit = packUnit;
     }
-    
-    
-    
-    
+
     public Vmp getVmp() {
         return vmp;
     }
@@ -44,6 +43,5 @@ public class Vmpp extends PharmaceuticalItem implements Serializable {
     public void setVmp(Vmp vmp) {
         this.vmp = vmp;
     }
-    
-    
+
 }

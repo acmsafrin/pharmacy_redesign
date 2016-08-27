@@ -7,6 +7,7 @@
  */
 package com.db.entity;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -29,52 +30,43 @@ public class WebUser implements Serializable {
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private Long id;
-    private String webUserPassword;
     @OneToOne(cascade = CascadeType.ALL)
+    @Expose
     private Person webUserPerson;
-    //Main Properties
-    @Column(unique = true, nullable = false)
-    private String name;
-    private String description;
-    //Created Properties
     @ManyToOne
     private WebUser creater;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
-    //Retairing properties
-    private boolean retired;
     @ManyToOne
     private WebUser retirer;
+
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    private Date createdAt;
+    @Expose
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date retiredAt;
+
+    @Expose
+    private String webUserPassword;
+    //Main Properties
+    @Column(unique = true, nullable = false)
+    @Expose
+    private String name;
+    @Expose
+    private String description;
+    @Expose
+    private boolean retired;
+    @Expose
     private String retireComments;
+    @Expose
     private String email;
+    @Expose
     private String telNo;
-    @ManyToOne
-    private Institution institution;
-    @ManyToOne
-    private Department department;
+    @Expose
     private String code;
 
     public WebUser() {
-    }
-
-    public Institution getInstitution() {
-        //System.out.println("Getting Institution");
-        return institution;
-    }
-
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public String getEmail() {

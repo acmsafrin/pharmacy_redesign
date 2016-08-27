@@ -6,6 +6,7 @@
 package com.db.entity;
 
 import com.db.entity.pharmacy.MeasurementUnit;
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -27,30 +28,44 @@ public class Item implements Serializable, Comparable<Item> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    @Expose
+    private Long id;
     @ManyToOne
-    Category category;
+    @Expose
+    private Category category;
     @ManyToOne
-    Institution institution;
-    String name;
-    String code;
-    String barcode;
-    //Created Properties
+    @Expose
+    private Institution institution;
     @ManyToOne
-    WebUser creater;
+    @Expose
+    private WebUser creater;
+    @ManyToOne
+    @Expose
+    private WebUser retirer;
+    @ManyToOne
+    @Expose
+    private MeasurementUnit measurementUnit;
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
-    //Retairing properties
-    boolean retired;
-    @ManyToOne
-    WebUser retirer;
+    @Expose
+    private Date createdAt;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
-    @ManyToOne
-    MeasurementUnit measurementUnit;
+    @Expose
+    private Date retiredAt;
+
+    @Expose
+    private String name;
+    @Expose
+    private String code;
+    @Expose
+    private String barcode;
+    @Expose
+    private boolean retired;
+    @Expose
+    private String retireComments;
     @Lob
-    String comments;
+    @Expose
+    private String comments;
 
     public Item() {
 
@@ -81,6 +96,28 @@ public class Item implements Serializable, Comparable<Item> {
         return "com.divudi.entity.Item[ id=" + id + " ]";
     }
 
+    
+    @Override
+    public int compareTo(Item o) {
+        if (o == null) {
+            return 0;
+        }
+
+        if (o.getName() == null) {
+            return 0;
+        }
+
+        if (this == null) {
+            return 0;
+        }
+
+        if (this.getName() == null) {
+            return 0;
+        }
+
+        return this.name.compareTo(o.name);
+    }
+
     public Long getId() {
         return id;
     }
@@ -89,7 +126,6 @@ public class Item implements Serializable, Comparable<Item> {
         this.id = id;
     }
 
-    
     public Category getCategory() {
         return category;
     }
@@ -98,13 +134,52 @@ public class Item implements Serializable, Comparable<Item> {
         this.category = category;
     }
 
-    
     public Institution getInstitution() {
         return institution;
     }
 
     public void setInstitution(Institution institution) {
         this.institution = institution;
+    }
+
+    public WebUser getCreater() {
+        return creater;
+    }
+
+    public void setCreater(WebUser creater) {
+        this.creater = creater;
+    }
+
+    public WebUser getRetirer() {
+        return retirer;
+    }
+
+    public void setRetirer(WebUser retirer) {
+        this.retirer = retirer;
+    }
+
+    public MeasurementUnit getMeasurementUnit() {
+        return measurementUnit;
+    }
+
+    public void setMeasurementUnit(MeasurementUnit measurementUnit) {
+        this.measurementUnit = measurementUnit;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getRetiredAt() {
+        return retiredAt;
+    }
+
+    public void setRetiredAt(Date retiredAt) {
+        this.retiredAt = retiredAt;
     }
 
     public String getName() {
@@ -131,44 +206,12 @@ public class Item implements Serializable, Comparable<Item> {
         this.barcode = barcode;
     }
 
-    public WebUser getCreater() {
-        return creater;
-    }
-
-    public void setCreater(WebUser creater) {
-        this.creater = creater;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public boolean isRetired() {
         return retired;
     }
 
-    public void setRetired(Boolean retired) {
+    public void setRetired(boolean retired) {
         this.retired = retired;
-    }
-
-    public WebUser getRetirer() {
-        return retirer;
-    }
-
-    public void setRetirer(WebUser retirer) {
-        this.retirer = retirer;
-    }
-
-    public Date getRetiredAt() {
-        return retiredAt;
-    }
-
-    public void setRetiredAt(Date retiredAt) {
-        this.retiredAt = retiredAt;
     }
 
     public String getRetireComments() {
@@ -179,14 +222,6 @@ public class Item implements Serializable, Comparable<Item> {
         this.retireComments = retireComments;
     }
 
-    public MeasurementUnit getMeasurementUnit() {
-        return measurementUnit;
-    }
-
-    public void setMeasurementUnit(MeasurementUnit measurementUnit) {
-        this.measurementUnit = measurementUnit;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -195,25 +230,6 @@ public class Item implements Serializable, Comparable<Item> {
         this.comments = comments;
     }
 
-    @Override
-    public int compareTo(Item o) {
-        if (o == null) {
-            return 0;
-        }
-
-        if (o.getName() == null) {
-            return 0;
-        }
-
-        if (this == null) {
-            return 0;
-        }
-
-        if (this.getName() == null) {
-            return 0;
-        }
-
-        return this.name.compareTo(o.name);
-    }
-
+    
+    
 }

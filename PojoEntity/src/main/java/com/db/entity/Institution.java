@@ -4,8 +4,8 @@
  */
 package com.db.entity;
 
-
 import com.enums.InstitutionType;
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -25,61 +25,56 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class Institution implements Serializable {
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    Institution institution;   
-
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //Main Properties   
-    Long id;
-    String institutionCode;
-    String name;
-    String address;
-    String fax;
-    String email;
-    String phone;
-    String mobile;
-    String web;
-    
+    @Expose
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Expose
+    private Institution institution;
+    @ManyToOne
+    @Expose
+    private WebUser creater;
+    @ManyToOne
+    @Expose
+    private WebUser retirer;
+
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    private Date createdAt;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    private Date retiredAt;
+
     @Enumerated(EnumType.STRING)
-    InstitutionType institutionType;
-    //Created Properties
-    @ManyToOne
-    WebUser creater;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
-    //Retairing properties
-    boolean retired;
-    @ManyToOne
-    WebUser retirer;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
-   
+    @Expose
+    private InstitutionType institutionType;
 
+    @Expose
+    private String institutionCode;
+    @Expose
+    private String name;
+    @Expose
+    private String address;
+    @Expose
+    private String fax;
+    @Expose
+    private String email;
+    @Expose
+    private String phone;
+    @Expose
+    private String mobile;
+    @Expose
+    private String web;
+    @Expose
+    private boolean retired;
+    @Expose
+    private String retireComments;
     @Lob
-    String descreption;
-
-  
-    public String getDescreption() {
-        return descreption;
-    }
-
-    public void setDescreption(String descreption) {
-        this.descreption = descreption;
-    }
-
-    
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Expose
+    private String descreption;
 
     @Override
     public int hashCode() {
@@ -106,28 +101,12 @@ public class Institution implements Serializable {
         return "lk.gov.health.entity.Institution[ id=" + id + " ]";
     }
 
-    public WebUser getCreater() {
-        return creater;
+    public Institution getInstitution() {
+        return institution;
     }
 
-    public void setCreater(WebUser creater) {
-        this.creater = creater;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isRetired() {
-        return retired;
-    }
-
-    public void setRetired(Boolean retired) {
-        this.retired = retired;
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
     }
 
     public WebUser getRetirer() {
@@ -138,6 +117,14 @@ public class Institution implements Serializable {
         this.retirer = retirer;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Date getRetiredAt() {
         return retiredAt;
     }
@@ -146,15 +133,22 @@ public class Institution implements Serializable {
         this.retiredAt = retiredAt;
     }
 
-    public String getRetireComments() {
-        return retireComments;
+    public InstitutionType getInstitutionType() {
+        return institutionType;
     }
 
-    public void setRetireComments(String retireComments) {
-        this.retireComments = retireComments;
+    public void setInstitutionType(InstitutionType institutionType) {
+        this.institutionType = institutionType;
     }
 
-    
+    public String getInstitutionCode() {
+        return institutionCode;
+    }
+
+    public void setInstitutionCode(String institutionCode) {
+        this.institutionCode = institutionCode;
+    }
+
     public String getName() {
         return name;
     }
@@ -211,30 +205,44 @@ public class Institution implements Serializable {
         this.web = web;
     }
 
-    public InstitutionType getInstitutionType() {
-        return institutionType;
+    public boolean isRetired() {
+        return retired;
     }
 
-    public void setInstitutionType(InstitutionType institutionType) {
-        this.institutionType = institutionType;
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
 
-    public String getInstitutionCode() {
-        return institutionCode;
+    public String getRetireComments() {
+        return retireComments;
     }
 
-    public void setInstitutionCode(String institutionCode) {
-        this.institutionCode = institutionCode;
+    public void setRetireComments(String retireComments) {
+        this.retireComments = retireComments;
     }
 
-    
-    public Institution getInstitution() {
-        
-        return institution;
+    public String getDescreption() {
+        return descreption;
     }
 
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
+    public void setDescreption(String descreption) {
+        this.descreption = descreption;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public WebUser getCreater() {
+        return creater;
+    }
+
+    public void setCreater(WebUser creater) {
+        this.creater = creater;
     }
 
 }

@@ -33,12 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        List<WebUser> list = webUserFacade.findAll();
-//        InMemoryUserDetailsManagerConfigurer imudmc = auth.inMemoryAuthentication();
-//        for (WebUser w : list) {
-//            imudmc.withUser(w.getName()).password(w.getWebUserPassword()).roles("ADMIN");
-//            applicationSingleton.getUserMap().put(w.getName(), w);
-//        }
+        List<WebUser> list = webUserFacade.findAll();
+        InMemoryUserDetailsManagerConfigurer imudmc = auth.inMemoryAuthentication();
+        for (WebUser w : list) {
+            imudmc.withUser(w.getName()).password(w.getWebUserPassword()).roles("ADMIN");
+            applicationSingleton.getUserMap().put(w.getName(), w);
+        }
     }
 
     @Override

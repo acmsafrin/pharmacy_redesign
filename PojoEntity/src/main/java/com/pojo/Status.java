@@ -5,6 +5,7 @@
  */
 package com.pojo;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 
 /**
@@ -12,8 +13,9 @@ import java.io.Serializable;
  * @author ACM Safrin
  */
 public class Status implements Serializable {
-
+    @Expose
     private String code;
+    @Expose
     private String message;
 
     public Status(String code, String message) {

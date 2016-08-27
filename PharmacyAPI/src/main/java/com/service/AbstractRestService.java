@@ -55,7 +55,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setCreater", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setCreaterDetail(t, cls.getSuperclass());
             }
@@ -79,7 +79,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setRetirer", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
-            e.printStackTrace();
+         //   e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setRetireDetail(t, cls.getSuperclass());
             }

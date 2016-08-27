@@ -4,14 +4,14 @@
  */
 package com.db.entity;
 
-
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 /**
- * 
+ *
  * @author ACM Safrin
  */
 @Entity
@@ -20,136 +20,39 @@ public class Category implements Serializable {
     static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    //Main Properties
-    String name;   
-    String description;
-    //Created Properties
+    @Expose
+    private Long id;
     @ManyToOne
-    WebUser creater;
+    @Expose
+    private WebUser creater;
+    @ManyToOne
+    @Expose
+    private WebUser retirer;
+    @ManyToOne
+    @Expose
+    private Category parentCategory;
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
-    //Retairing properties
-    boolean retired;
-    @ManyToOne
-    WebUser retirer;
+    @Expose
+    private Date createdAt;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
-    Double dblValue;
-    Long longValue;
-    @ManyToOne
-    Category parentCategory;    
-    String code;    
+    @Expose
+    private Date retiredAt;
 
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Category() {
-    }
-
-    public Double getDblValue() {
-        return dblValue;
-    }
-
-    public void setDblValue(Double dblValue) {
-        this.dblValue = dblValue;
-    }
-
-    public Long getLongValue() {
-        return longValue;
-    }
-
-    public void setLongValue(Long longValue) {
-        this.longValue = longValue;
-    }
-
-    public Category getParentCategory() {
-        return parentCategory;
-    }
-
-    public void setParentCategory(Category parentCategory) {
-        this.parentCategory = parentCategory;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public WebUser getCreater() {
-        return creater;
-    }
-
-    public void setCreater(WebUser creater) {
-        this.creater = creater;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRetireComments() {
-        return retireComments;
-    }
-
-    public void setRetireComments(String retireComments) {
-        this.retireComments = retireComments;
-    }
-
-    public boolean isRetired() {
-        return retired;
-    }
-
-    public void setRetired(Boolean retired) {
-        this.retired = retired;
-    }
-
-    public Date getRetiredAt() {
-        return retiredAt;
-    }
-
-    public void setRetiredAt(Date retiredAt) {
-        this.retiredAt = retiredAt;
-    }
-
-    public WebUser getRetirer() {
-        return retirer;
-    }
-
-    public void setRetirer(WebUser retirer) {
-        this.retirer = retirer;
-    }
-
-   
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Expose
+    private String name;
+    @Expose
+    private String description;
+    @Expose
+    private boolean retired;
+    @Expose
+    private String retireComments;
+    @Expose
+    private Double dblValue;
+    @Expose
+    private Long longValue;
+    @Expose
+    private String code;
 
     @Override
     public int hashCode() {
@@ -170,10 +73,113 @@ public class Category implements Serializable {
         return true;
     }
 
-     @Override
+    @Override
     public String toString() {
         return "com.divudi.entity.Category[ id=" + id + " ]";
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public WebUser getCreater() {
+        return creater;
+    }
+
+    public void setCreater(WebUser creater) {
+        this.creater = creater;
+    }
+
+    public WebUser getRetirer() {
+        return retirer;
+    }
+
+    public void setRetirer(WebUser retirer) {
+        this.retirer = retirer;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getRetiredAt() {
+        return retiredAt;
+    }
+
+    public void setRetiredAt(Date retiredAt) {
+        this.retiredAt = retiredAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
+    }
+
+    public String getRetireComments() {
+        return retireComments;
+    }
+
+    public void setRetireComments(String retireComments) {
+        this.retireComments = retireComments;
+    }
+
+    public Double getDblValue() {
+        return dblValue;
+    }
+
+    public void setDblValue(Double dblValue) {
+        this.dblValue = dblValue;
+    }
+
+    public Long getLongValue() {
+        return longValue;
+    }
+
+    public void setLongValue(Long longValue) {
+        this.longValue = longValue;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
 }

@@ -23,7 +23,7 @@ public class AbstractRestService<T> {
 
     private AbstractFacade abstractFacade;
     @Autowired
-    ApplicationSingleton applicationSingleton;
+    private ApplicationSingleton applicationSingleton;
 
     public AbstractFacade getAbstractFacade() {
         return abstractFacade;

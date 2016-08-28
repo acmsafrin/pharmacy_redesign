@@ -4,6 +4,10 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             url: '/category',
             templateUrl: 'partials/category/index.html',
             controller: 'category'
+        }).state('itemdistributer', {
+            url: '/itemdistributer',
+            templateUrl: 'partials/itemdistributer/index.html',
+            controller: 'itemdistributer'
         }).state('department', {
             url: '/department',
             templateUrl: 'partials/department/index.html',
@@ -12,6 +16,18 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             url: '/institution',
             templateUrl: 'partials/institution/index.html',
             controller: 'institution'
+        }).state('dealer', {
+            url: '/dealer',
+            templateUrl: 'partials/dealer/index.html',
+            controller: 'dealer'
+        }).state('importer', {
+            url: '/importer',
+            templateUrl: 'partials/importer/index.html',
+            controller: 'importer'
+        }).state('manufacturer', {
+            url: '/manufacturer',
+            templateUrl: 'partials/manufacturer/index.html',
+            controller: 'manufacturer'
         }).state('webuser', {
             url: '/webuser',
             templateUrl: 'partials/webuser/index.html',

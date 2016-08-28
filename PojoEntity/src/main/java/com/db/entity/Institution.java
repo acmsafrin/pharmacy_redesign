@@ -4,13 +4,10 @@
  */
 package com.db.entity;
 
-import com.enums.InstitutionType;
 import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,10 +44,6 @@ public class Institution implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Expose
     private Date retiredAt;
-
-    @Enumerated(EnumType.STRING)
-    @Expose
-    private InstitutionType institutionType;
 
     @Expose
     private String institutionCode;
@@ -133,13 +126,7 @@ public class Institution implements Serializable {
         this.retiredAt = retiredAt;
     }
 
-    public InstitutionType getInstitutionType() {
-        return institutionType;
-    }
-
-    public void setInstitutionType(InstitutionType institutionType) {
-        this.institutionType = institutionType;
-    }
+   
 
     public String getInstitutionCode() {
         return institutionCode;

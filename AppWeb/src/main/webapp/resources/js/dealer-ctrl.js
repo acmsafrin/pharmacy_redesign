@@ -1,15 +1,15 @@
-angular.module('pharmacy.controllers').controller('institution', ['$scope', 'ReloadList','Institution', function($scope, ReloadList,Institution) {
+angular.module('pharmacy.controllers').controller('dealer', ['$scope', 'ReloadList','Dealer', function($scope, ReloadList,Dealer) {
        
         $scope.view = function(id) {
-            $scope.current = Institution.REST.get({id: id});
+            $scope.current = Dealer.REST.get({id: id});
         }
 
         $scope.add = function() {
-            $scope.current = new Institution.REST();
+            $scope.current = new Dealer.REST();
         }
         
         $scope.load = function() {
-           $scope.list = Institution.REST.query();
+           $scope.list = Dealer.REST.query();
         }
 
         $scope.delete = function() {

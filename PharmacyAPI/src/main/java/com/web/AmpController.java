@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,14 +33,14 @@ public class AmpController<S extends AmpService> {
     @Autowired
     private S service;
 
+
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    String findAll() {
+    String findAll(@RequestParam int offset,@RequestParam int pagesize) {
         String result;
         try {
-            result = service.findAll();
+            result = service.findAll(offset, pagesize);
         } catch (Exception e) {
-            e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
         }
 
@@ -62,7 +63,7 @@ public class AmpController<S extends AmpService> {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String save(@RequestBody Amp entity) {
-        String result;        
+        String result;
         try {
             service.save(entity);
             result = GsonUtil.toJson(new SuccesStatus());
@@ -97,6 +98,5 @@ public class AmpController<S extends AmpService> {
         }
         return result;
     }
-
 
 }

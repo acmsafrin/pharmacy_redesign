@@ -1,13 +1,17 @@
 <div class="my-list-table">
 <table class="table table-striped" >
     <tr>
-        <td colspan="2"><h4>Item Master</h4></td>
+        <td><h4>Item Master</h4></td>
+        <td><a class="btn btn-primary"  ng-click="prev()">Prev</a></td>
+        <td><a class="btn btn-primary"  ng-click="next()">Next</a></td>
     </tr>
     <tr>
+        <td></td>
         <td><input type="text" class="form-control"  placeholder="Code" ng-model="search.code"></td>
         <td><input type="text" class="form-control"  placeholder="Name" ng-model="search.name"></td>
     </tr>
     <tr ng-click="view(option.id)" ng-repeat="option in list | filter:search:strict">
+        <td>{{option.id}}</td>
         <td>{{option.code}}</td>
         <td>{{option.name}}</td>       
     </tr>

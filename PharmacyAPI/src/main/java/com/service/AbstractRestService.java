@@ -35,10 +35,20 @@ public class AbstractRestService<T> {
     }
 
     public String findAll() {
-        List<T> list=abstractFacade.findAll();
-        System.out.println("JSON START "+list.size()+":::"+new Date());
-        String json= GsonUtil.toJson(list);
-        System.out.println("JSON END "+new Date());
+        List<T> list = abstractFacade.findAll();
+        String json = GsonUtil.toJson(list);
+        return json;
+    }
+
+    public String findAll(int max) {
+        List<T> list = abstractFacade.findAll(max);
+        String json = GsonUtil.toJson(list);
+        return json;
+    }
+    
+     public String findAll(int offset,int pagesize) {
+        List<T> list = abstractFacade.findAll(offset,pagesize);
+        String json = GsonUtil.toJson(list);
         return json;
     }
 
@@ -55,7 +65,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setCreatedAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setCreater", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
-           // e.printStackTrace();
+            // e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setCreaterDetail(t, cls.getSuperclass());
             }
@@ -79,7 +89,7 @@ public class AbstractRestService<T> {
             cls.getDeclaredMethod("setRetiredAt", Date.class).invoke(t, new Date());
             cls.getDeclaredMethod("setRetirer", WebUser.class).invoke(t, getLoggedUser());
         } catch (Exception e) {
-         //   e.printStackTrace();
+            //   e.printStackTrace();
             if (cls.getSuperclass() != null) {
                 setRetireDetail(t, cls.getSuperclass());
             }

@@ -40,7 +40,7 @@ angular.module('pharmacy.factories')
                     REST: $resource('http://localhost:8080/PharmacyAPI/amp/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
-                        }
+                        },
                     })
                 }
             }])

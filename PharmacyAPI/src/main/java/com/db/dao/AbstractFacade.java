@@ -5,9 +5,11 @@
  */
 package com.db.dao;
 
+import com.util.Limit;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -48,7 +50,7 @@ public class AbstractFacade<T> {
 
     public List<T> findByName(String name) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).add(Restrictions.eq("retired", false))
-                .add(Restrictions.like("name", "%"+name+"%"));
+                .add(Restrictions.like("name", "%" + name + "%"));
         return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
@@ -66,10 +68,22 @@ public class AbstractFacade<T> {
     }
 
     public List<T> findAll() {
-        System.out.println("DAO START "+new Date());
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).add(Restrictions.eq("retired", false));
-        List<T> list= (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);        
-        System.out.println("DAO END "+new Date());
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
+        return list;
+    }
+
+    public List<T> findAll(int max) {        
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).
+                add(Restrictions.eq("retired", false)).addOrder(Order.asc("id")).add(Limit.by(max));        
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
+        return list;
+    }
+    
+     public List<T> findAll(int offset,int pagesize) {        
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).
+                add(Restrictions.eq("retired", false)).addOrder(Order.asc("id"));        
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria,offset,pagesize);
         return list;
     }
 

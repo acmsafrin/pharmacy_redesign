@@ -4,8 +4,8 @@
  */
 package com.db.entity;
 
-
 import com.enums.DepartmentType;
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
- * 
+ *
  * @author ACM Safrin
  */
 @Entity
@@ -28,37 +28,43 @@ public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //Main Properties   
-    Long id;
-    String departmentCode;
-    String name;   
-    String phone;  
+    @Expose
+    private Long id;
+
+    @Expose
     @ManyToOne
-    Institution institution;   
+    private Institution institution;
+    @ManyToOne
+    @Expose
+    private WebUser creater;
+    @ManyToOne
+    @Expose
+    private WebUser retirer;
+
+    @Expose
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Expose
+    private Date retiredAt;
+
+    @Expose
     @Enumerated(EnumType.STRING)
-    DepartmentType departmentType;
-    //Created Properties
-    @ManyToOne
-    WebUser creater;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date createdAt;
-    //Retairing properties
-    boolean retired;
-    @ManyToOne
-    WebUser retirer;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    Date retiredAt;
-    String retireComments;
+    private DepartmentType departmentType;
 
+    @Expose
+    private String departmentCode;
+    @Expose
+    private String name;
+    @Expose
+    private String phone;
+    @Expose
+    private boolean retired;
 
-  
-    public Long getId() {
-        return id;
-    }
+    @Expose
+    private String retireComments;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+ 
     @Override
     public int hashCode() {
         int hash = 0;
@@ -81,7 +87,15 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "com.divudi.entity.Department[ id=" + id + " ]";
+        return "com.db.entity.Department[ id=" + id + " ]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Institution getInstitution() {
@@ -92,29 +106,12 @@ public class Department implements Serializable {
         this.institution = institution;
     }
 
- 
     public WebUser getCreater() {
         return creater;
     }
 
     public void setCreater(WebUser creater) {
         this.creater = creater;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isRetired() {
-        return retired;
-    }
-
-    public void setRetired(Boolean retired) {
-        this.retired = retired;
     }
 
     public WebUser getRetirer() {
@@ -125,28 +122,20 @@ public class Department implements Serializable {
         this.retirer = retirer;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Date getRetiredAt() {
         return retiredAt;
     }
 
     public void setRetiredAt(Date retiredAt) {
         this.retiredAt = retiredAt;
-    }
-
-    public String getRetireComments() {
-        return retireComments;
-    }
-
-    public void setRetireComments(String retireComments) {
-        this.retireComments = retireComments;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public DepartmentType getDepartmentType() {
@@ -165,12 +154,36 @@ public class Department implements Serializable {
         this.departmentCode = departmentCode;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(Boolean retired) {
+        this.retired = retired;
+    }
+
+    public String getRetireComments() {
+        return retireComments;
+    }
+
+    public void setRetireComments(String retireComments) {
+        this.retireComments = retireComments;
     }
 
 }

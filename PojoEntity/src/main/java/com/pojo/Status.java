@@ -17,6 +17,7 @@ public class Status implements Serializable {
     private String code;
     @Expose
     private String message;
+    
 
     public Status(String code, String message) {
         this.code = code;

@@ -1,4 +1,4 @@
-angular.module('pharmacy.controllers').controller('department', ['$scope', '$state','ReloadList','Department','Institution', function($scope, $state,ReloadList,Department,Institution) {
+angular.module('pharmacy.controllers').controller('department', ['$scope','ReloadList','Department','Institution', function($scope, ReloadList,Department,Institution) {
         $scope.institutionFilter = Institution.FILTER;
         
         $scope.view = function(id) {

@@ -1,40 +1,18 @@
-angular.module('pharmacy.controllers').controller('amp', ['$scope', 'ReloadList', 'Amp', function($scope, ReloadList, Amp) {
-        $scope.paginate = {
-            pagesize: 1000,
-            offset: {
-                next: 0,
-                prev: 0,
-            },
-            checkPrev: function() {
-                return $scope.paginate.offset.prev == 0;
-            },
-            checkNext: function() {
-                return ($scope.paginate.offset.next != 0 && $scope.list.length == 0);
-            },
-            decrement: function() {
-                $scope.paginate.offset.next = $scope.paginate.offset.prev;
-                $scope.paginate.offset.prev = $scope.paginate.offset.prev - $scope.paginate.pagesize;
-            },
-            increment: function() {
-                $scope.paginate.offset.prev = $scope.paginate.offset.next;
-                $scope.paginate.offset.next = $scope.paginate.offset.next + $scope.paginate.pagesize;
-            },
-        };
-
+angular.module('pharmacy.controllers').controller('amp', ['$scope', 'ReloadList', 'Paginate', 'Amp', function($scope, ReloadList,Paginate, Amp) {
         $scope.prev = function() {
-            if ($scope.paginate.checkPrev()) {
+            if (Paginate.checkPrev()) {
                 return;
             }
-            $scope.paginate.decrement();
-            $scope.list = Amp.REST.query({offset: $scope.paginate.offset.prev, pagesize: $scope.paginate.pagesize});
+            Paginate.decrement();
+            $scope.list = Amp.REST.query({offset: Paginate.offset.prev, pagesize: Paginate.pagesize}).list;
         }
 
         $scope.next = function() {
-            if ($scope.paginate.checkNext()) {
+            if (Paginate.checkNext($scope.list)) {
                 return;
             }
-            $scope.list = Amp.REST.query({offset: $scope.paginate.offset.next, pagesize: $scope.paginate.pagesize});
-            $scope.paginate.increment();
+            $scope.list = Amp.REST.query({offset: Paginate.offset.next, pagesize: Paginate.pagesize}).list;
+            Paginate.increment();
         }
 
         $scope.view = function(id) {

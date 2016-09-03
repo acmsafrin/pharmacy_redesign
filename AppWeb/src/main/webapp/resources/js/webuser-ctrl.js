@@ -1,4 +1,4 @@
-angular.module('pharmacy.controllers').controller('webuser', ['$scope', '$state', 'ReloadList', 'Webuser', 'Institution', function($scope, $state, ReloadList, Webuser, Institution) {
+angular.module('pharmacy.controllers').controller('webuser', ['$scope', 'ReloadList', 'Webuser', 'Institution', function($scope,ReloadList, Webuser, Institution) {
         $scope.institutionFilter = Institution.FILTER;
         $scope.view = function(id) {
             $scope.current = Webuser.REST.get({id: id});

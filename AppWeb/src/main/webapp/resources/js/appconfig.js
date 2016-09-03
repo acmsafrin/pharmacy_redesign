@@ -1,4 +1,4 @@
-angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
+angular.module('pharmacy').config(['$stateProvider','$httpProvider', function($stateProvider) {
         //Category
         $stateProvider.state('category', {
             url: '/category',
@@ -33,7 +33,9 @@ angular.module('pharmacy').config(['$stateProvider', function($stateProvider) {
             templateUrl: 'partials/webuser/index.html',
             controller: 'webuser'
         })
+        
+
     }]).run(['$state', '$rootScope', function($state, $rootScope) {
         $rootScope.global = {loaded: true};
-        $state.go('category');
+        $state.go('institution');
     }]);

@@ -1,4 +1,4 @@
-angular.module('pharmacy.controllers').controller('category', ['$scope', '$state','ReloadList', 'Category', function($scope, $state,ReloadList, Category) {
+angular.module('pharmacy.controllers').controller('category', ['$scope','ReloadList', 'Category', function($scope, ReloadList, Category) {
         
         $scope.view = function(id) {
             $scope.current = Category.REST.get({id: id});

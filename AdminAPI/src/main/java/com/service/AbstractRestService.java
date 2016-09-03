@@ -9,11 +9,13 @@ import com.db.dao.AbstractFacade;
 import com.db.entity.WebUser;
 import com.util.GsonUtil;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import com.pojo.Status;
 
 /**
  *
@@ -35,6 +37,19 @@ public class AbstractRestService<T> {
 
     public String findAll() {
         return GsonUtil.toJson(abstractFacade.findAll());
+    }
+
+    public String findAll(int offset, int pagesize) {
+        List<T> list = abstractFacade.findAll(offset, pagesize);
+        String json = GsonUtil.toJson(list);
+        return json;
+    }
+
+    public String count() {
+        Long count = abstractFacade.count();
+        Status status = new Status("003", count.toString());
+        String json = GsonUtil.toJson(status);
+        return json;
     }
 
     public String find(long id) {

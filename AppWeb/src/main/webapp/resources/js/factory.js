@@ -13,7 +13,11 @@ angular.module('pharmacy.factories')
                     REST: $resource('http://localhost:8080/AdminAPI/itemDistributor/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
-                        }
+                        },
+                        count:{
+                            url:'http://localhost:8080/AdminAPI/itemDistributor/count',
+                            method:'GET'
+                        },
                     })
                 }
             }])
@@ -22,7 +26,7 @@ angular.module('pharmacy.factories')
                     REST: $resource('http://localhost:8080/AdminAPI/department/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
-                        }
+                        },                        
                     })
                 }
             }])

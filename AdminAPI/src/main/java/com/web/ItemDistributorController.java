@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,10 +36,10 @@ public class ItemDistributorController<S extends ItemDistributorService> {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    String findAll() {
+    String findAll(@RequestParam int offset, @RequestParam int pagesize) {
         String result;
         try {
-            result = service.findAll();
+            result = service.findAll(offset, pagesize);
         } catch (Exception e) {
             e.printStackTrace();
             result = GsonUtil.toJson(new ErrorStatus());
@@ -60,6 +61,19 @@ public class ItemDistributorController<S extends ItemDistributorService> {
         return result;
     }
     
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public @ResponseBody
+    String count() {
+        String result;
+        try {
+            result = service.count();
+        } catch (Exception e) {
+            result = GsonUtil.toJson(new ErrorStatus());
+        }
+
+        return result;
+    }
+
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     public @ResponseBody
     String filterByName(@PathVariable("name") String name) {
@@ -111,7 +125,5 @@ public class ItemDistributorController<S extends ItemDistributorService> {
         }
         return result;
     }
-
-      
 
 }

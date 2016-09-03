@@ -7,9 +7,11 @@ package com.db.dao;
 
 import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.hibernate.criterion.Projections;
 
 /**
  *
@@ -47,7 +49,7 @@ public class AbstractFacade<T> {
 
     public List<T> findByName(String name) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).add(Restrictions.eq("retired", false))
-                .add(Restrictions.like("name", "%"+name+"%"));
+                .add(Restrictions.like("name", "%" + name + "%"));
         return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
@@ -69,9 +71,19 @@ public class AbstractFacade<T> {
         return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
-    public List<T> findBySQL(String temSQL) {
-        List<T> list = (List<T>) (getHibernateTemplate().find(temSQL));
+    public List<T> findAll(int offset, int pagesize) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).
+                add(Restrictions.eq("retired", false)).addOrder(Order.asc("id"));
+        List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, pagesize);
         return list;
     }
 
+    public List findBySQL(String temSQL) {        
+        return (getHibernateTemplate().find(temSQL));
+    }
+
+    public Long count(){       
+        List list= findBySQL("select count(*) from "+entityClass.getSimpleName());
+        return (Long)list.get(0);
+    }
 }

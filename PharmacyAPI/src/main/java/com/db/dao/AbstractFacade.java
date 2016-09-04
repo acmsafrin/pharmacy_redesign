@@ -47,6 +47,11 @@ public class AbstractFacade<T> {
     public T find(Long id) {
         return getHibernateTemplate().get(entityClass, id);
     }
+    
+     public Long count(){       
+        List list= findBySQL("select count(*) from "+entityClass.getSimpleName());
+        return (Long)list.get(0);
+    }
 
     public List<T> findByName(String name) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass).add(Restrictions.eq("retired", false))

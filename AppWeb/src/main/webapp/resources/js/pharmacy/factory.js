@@ -1,70 +1,102 @@
 angular.module('pharmacy.factories')
-        .factory('Pharmaceuticalitemcategory', ['$resource', function($resource) {
+        .factory('PharmacyProperty', [function() {
+                //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/pharmaceuticalItemCategory/:id', {id: '@id'}, {
+                    root: 'http://localhost:8080/PharmacyAPI/',
+                    entity: {
+                        pharmaceuticalItemCategory: 'pharmaceuticalItemCategory',
+                        pharmaceuticalItemType: 'pharmaceuticalItemType',
+                        vtm: 'vtm',
+                        vmp: 'vmp',
+                        amp: 'amp',
+                        ampp: 'ampp',
+                        measurementUnit: 'measurementUnit',
+                        frequencyUnit: 'frequencyUnit'
+                    }
+                }
+            }])
+        .factory('Pharmaceuticalitemcategory', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
+                return{
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.pharmaceuticalItemCategory + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-        .factory('Pharmaceuticalitemtype', ['$resource', function($resource) {
+        .factory('Pharmaceuticalitemtype', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/pharmaceuticalItemType/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.pharmaceuticalItemType + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-        .factory('Vtm', ['$resource', function($resource) {
+        .factory('Vtm', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/vtm/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.vtm + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-        .factory('Vmp', ['$resource', function($resource) {
+        .factory('Vmp', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/vmp/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.vmp + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-        .factory('Amp', ['$resource', function($resource) {
+        .factory('Amp', ['$resource', '$q', '$http' , 'PharmacyProperty', function($resource,$q,$http, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/amp/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.amp + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         },
-                    })
+                    }),
+                    FILTER: {
+                        filterByName: function(query) {
+                            var deferred = $q.defer();
+                            $http.get(PharmacyProperty.root + PharmacyProperty.entity.amp + '/name/' + query)
+                                    .success(function(data) {
+                                        deferred.resolve(angular.forEach(data, function(obj, key) {
+                                            return{value: {id: obj.id},
+                                                name: obj.name
+                                            }
+                                        }));
+                                    }).error(function(msg, code) {
+                                deferred.reject(msg);
+                            });
+                            return deferred.promise;
+                        }
+                    }
                 }
             }])
-        .factory('Ampp', ['$resource', function($resource) {
+        .factory('Ampp', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/ampp/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.ampp + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-         .factory('Measurementunit', ['$resource', function($resource) {
+        .factory('Measurementunit', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/measurementUnit/:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.measurementUnit + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-        .factory('Frequencyunit', ['$resource', function($resource) {
+        .factory('Frequencyunit', ['$resource', 'PharmacyProperty', function($resource, PharmacyProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/PharmacyAPI/frequencyUnit /:id', {id: '@id'}, {
+                    REST: $resource(PharmacyProperty.root + PharmacyProperty.entity.frequencyUnit + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }

@@ -10,7 +10,7 @@
     </tr>
     <tr ng-click="view(option.id)" ng-repeat="option in list | filter:search:strict">        
         <td>{{option.code}}</td>   
-        <td>{{option.name}}</td>       
+        <td>{{option.webUserPerson.name}}</td>       
         <td>{{option.webUserPerson.mobile}}</td>      
     </tr>
 </table>

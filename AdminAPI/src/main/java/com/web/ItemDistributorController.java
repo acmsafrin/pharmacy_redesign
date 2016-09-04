@@ -47,6 +47,9 @@ public class ItemDistributorController<S extends ItemDistributorService> {
 
         return result;
     }
+    
+    
+   
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
@@ -60,7 +63,7 @@ public class ItemDistributorController<S extends ItemDistributorService> {
 
         return result;
     }
-    
+
     @RequestMapping(value = "/count", method = RequestMethod.GET)
     public @ResponseBody
     String count() {
@@ -74,9 +77,23 @@ public class ItemDistributorController<S extends ItemDistributorService> {
         return result;
     }
 
+    @RequestMapping(value = "/dealer", method = RequestMethod.GET)
+    public @ResponseBody
+    String findByDealer(@RequestParam Long id) {
+        String result;
+        try {
+            result = service.findByDealer(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = GsonUtil.toJson(new ErrorStatus());
+        }
+
+        return result;
+    }
+
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     public @ResponseBody
-    String filterByName(@PathVariable("name") String name) {
+    String filterByDistributor(@PathVariable("name") String name) {
         String result;
         try {
             result = service.findByName(name);

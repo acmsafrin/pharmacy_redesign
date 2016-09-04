@@ -18,7 +18,7 @@ angular.module('pharmacy.services')
             }])
         .service('Paginate', [function() {
                 return{
-                    pagesize: 500,
+                    pagesize: 1000,
                     offset: {
                         next: 0,
                         prev: 0,

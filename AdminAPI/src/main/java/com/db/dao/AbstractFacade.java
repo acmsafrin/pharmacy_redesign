@@ -11,7 +11,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.hibernate.criterion.Projections;
 
 /**
  *
@@ -86,4 +85,13 @@ public class AbstractFacade<T> {
         List list= findBySQL("select count(*) from "+entityClass.getSimpleName());
         return (Long)list.get(0);
     }
+
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+    
 }

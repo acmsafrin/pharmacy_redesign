@@ -7,6 +7,7 @@ package com.service;
 
 import com.db.dao.AbstractFacade;
 import com.db.entity.WebUser;
+import com.pojo.Status;
 import com.util.GsonUtil;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +55,13 @@ public class AbstractRestService<T> {
 
     public String find(long id) {
         return GsonUtil.toJson(abstractFacade.find(id));
+    }
+    
+     public String count() {
+        Long count = abstractFacade.count();
+        Status status = new Status("003", count.toString());
+        String json = GsonUtil.toJson(status);
+        return json;
     }
 
     public String findByName(String name) {

@@ -1,47 +1,68 @@
 angular.module('pharmacy.factories')
-        .factory('Category', ['$resource', function($resource) {
+        .factory('AdminProperty', [function() {
+                //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
+                //http://stackoverflow.com/questions/17134401/angular-extending-resource-subobject-with-custom-methods
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/category/:id', {id: '@id'}, {
+                    root: 'http://localhost:8080/AdminAPI/',
+                    entity: {
+                        category: 'category',
+                        itemDistributor: 'itemDistributor',
+                        department: 'department',
+                        institution: 'institution',
+                        dealer: 'dealer',
+                        importer: 'importer',
+                        manufacturer: 'manufacturer',
+                        webuser: 'webuser'
+                    }
+                }
+            }])
+        .factory('Category', ['$resource', 'AdminProperty', function($resource, AdminProperty) {
+                return{
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.category + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     })
                 }
             }])
-         .factory('Itemdistributer', ['$resource', function($resource) {
+        .factory('Itemdistributer', ['$resource', 'AdminProperty', function($resource, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/itemDistributor/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.itemDistributor + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         },
-                        count:{
-                            url:'http://localhost:8080/AdminAPI/itemDistributor/count',
-                            method:'GET'
+                        count: {
+                            url: AdminProperty.root + AdminProperty.entity.itemDistributor + '/count',
+                            method: 'GET'
+                        },
+                        bydealer: {
+                            url: AdminProperty.root + AdminProperty.entity.itemDistributor + '/dealer',
+                            method: 'GET',
+                            isArray: true,
                         },
                     })
                 }
             }])
-        .factory('Department', ['$resource', function($resource) {
+        .factory('Department', ['$resource', 'AdminProperty', function($resource, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/department/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.department + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
-                        },                        
+                        },
                     })
                 }
             }])
-        .factory('Institution', ['$resource', '$q', '$http', function($resource, $q, $http) {
+        .factory('Institution', ['$resource', '$q', '$http', 'AdminProperty', function($resource, $q, $http, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/institution/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.institution + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     }),
                     FILTER: {
-                        //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
                         filterByName: function(query) {
                             var deferred = $q.defer();
-                            $http.get('http://localhost:8080/AdminAPI/institution/name/' + query)
+                            $http.get(AdminProperty.root + AdminProperty.entity.institution + '/name/' + query)
                                     .success(function(data) {
                                         deferred.resolve(angular.forEach(data, function(obj, key) {
                                             return{value: {id: obj.id},
@@ -56,18 +77,50 @@ angular.module('pharmacy.factories')
                     }
                 }
             }])
-        .factory('Dealer', ['$resource', '$q', '$http', function($resource, $q, $http) {
+        .factory('Dealer', ['$resource', '$q', '$http', 'AdminProperty', function($resource, $q, $http, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/dealer/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.dealer + '/:id', {id: '@id'}, {
+                        update: {
+                            method: 'PUT'
+                        },
+                        query: {
+                            method: 'GET',
+                            isArray: true,
+                            transformResponse: function(data, header) {
+                                var wrapped = angular.fromJson(data);
+                                return wrapped.items;
+                            }
+                        }
+                    }),
+                    FILTER: {
+                        filterByName: function(query) {
+                            var deferred = $q.defer();
+                            $http.get(AdminProperty.root + AdminProperty.entity.dealer + '/name/' + query)
+                                    .success(function(data) {
+                                        deferred.resolve(angular.forEach(data, function(obj, key) {
+                                            return{value: {id: obj.id},
+                                                name: obj.name
+                                            }
+                                        }));
+                                    }).error(function(msg, code) {
+                                deferred.reject(msg);
+                            });
+                            return deferred.promise;
+                        },
+                    }
+                }
+            }])
+        .factory('Importer', ['$resource', '$q', '$http', 'AdminProperty', function($resource, $q, $http, AdminProperty) {
+                return{
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.importer + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     }),
                     FILTER: {
-                        //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
                         filterByName: function(query) {
                             var deferred = $q.defer();
-                            $http.get('http://localhost:8080/AdminAPI/dealer/name/' + query)
+                            $http.get(AdminProperty.root + AdminProperty.entity.importer + '/name/' + query)
                                     .success(function(data) {
                                         deferred.resolve(angular.forEach(data, function(obj, key) {
                                             return{value: {id: obj.id},
@@ -82,18 +135,17 @@ angular.module('pharmacy.factories')
                     }
                 }
             }])
-        .factory('Importer', ['$resource', '$q', '$http', function($resource, $q, $http) {
+        .factory('Manufacturer', ['$resource', '$q', '$http', 'AdminProperty', function($resource, $q, $http, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/importer/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.manufacturer + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }
                     }),
                     FILTER: {
-                        //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
                         filterByName: function(query) {
                             var deferred = $q.defer();
-                            $http.get('http://localhost:8080/AdminAPI/importer/name/' + query)
+                            $http.get(AdminProperty.root + AdminProperty.entity.manufacturer + '/name/' + query)
                                     .success(function(data) {
                                         deferred.resolve(angular.forEach(data, function(obj, key) {
                                             return{value: {id: obj.id},
@@ -108,35 +160,9 @@ angular.module('pharmacy.factories')
                     }
                 }
             }])
-        .factory('Manufacturer', ['$resource', '$q', '$http', function($resource, $q, $http) {
+        .factory('Webuser', ['$resource', 'AdminProperty', function($resource, AdminProperty) {
                 return{
-                    REST: $resource('http://localhost:8080/AdminAPI/manufacturer/:id', {id: '@id'}, {
-                        update: {
-                            method: 'PUT'
-                        }
-                    }),
-                    FILTER: {
-                        //http://www.tutorialspoint.com/angular_material/angular_material_autocomplete.htm
-                        filterByName: function(query) {
-                            var deferred = $q.defer();
-                            $http.get('http://localhost:8080/AdminAPI/manufacturer/name/' + query)
-                                    .success(function(data) {
-                                        deferred.resolve(angular.forEach(data, function(obj, key) {
-                                            return{value: {id: obj.id},
-                                                name: obj.name
-                                            }
-                                        }));
-                                    }).error(function(msg, code) {
-                                deferred.reject(msg);
-                            });
-                            return deferred.promise;
-                        }
-                    }
-                }
-            }])
-        .factory('Webuser', ['$resource', function($resource) {
-                return{                    
-                    REST: $resource('http://localhost:8080/AdminAPI/webuser/:id', {id: '@id'}, {
+                    REST: $resource(AdminProperty.root + AdminProperty.entity.webuser + '/:id', {id: '@id'}, {
                         update: {
                             method: 'PUT'
                         }

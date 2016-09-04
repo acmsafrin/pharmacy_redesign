@@ -33,10 +33,9 @@ public class AmpController<S extends AmpService> {
     @Autowired
     private S service;
 
-
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    String findAll(@RequestParam int offset,@RequestParam int pagesize) {
+    String findAll(@RequestParam int offset, @RequestParam int pagesize) {
         String result;
         try {
             result = service.findAll(offset, pagesize);
@@ -53,6 +52,19 @@ public class AmpController<S extends AmpService> {
         String result;
         try {
             result = service.find(id);
+        } catch (Exception e) {
+            result = GsonUtil.toJson(new ErrorStatus());
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    String filterByName(@PathVariable("name") String name) {
+        String result;
+        try {
+            result = service.findByName(name);
         } catch (Exception e) {
             result = GsonUtil.toJson(new ErrorStatus());
         }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.db.dao;
 
 import com.db.entity.Dealer;
@@ -14,9 +13,9 @@ import org.springframework.stereotype.Component;
  * @author ACM Safrin
  */
 @Component
-public class DealerFacade extends AbstractFacade<Dealer>{
+public class DealerFacade extends AbstractFacade<Dealer> {
 
     public DealerFacade() {
         super(Dealer.class);
-    }
+    }   
 }
